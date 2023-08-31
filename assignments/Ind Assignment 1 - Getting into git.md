@@ -1,15 +1,18 @@
-# Goal
+# Individual Assignment 1 - Getting into git
+In this assignment, students will be able to practice creating repositories, adding files, committing changes, dealing with branches and managing pull requests.
+
+## Goal
 Develop some hands on skills with git and GitHub.
 
-# Deliverables (10 pts)
+## Deliverables (10 pts)
 - Link to a repository which demonstrates the student's ability to work with local and remote repositories
 - Screenshots of the commit history, pull requests, final state which shows the above steps.
 
-# Background
+## Background
 In the world of Information Systems and Analytics, having the right tools can make all the difference. That's where Git and GitHub come into play. They're not just tech buzzwords – they're essential tools that can shape your success in this dynamic field.
 In this assignment, we're diving into the basics of Git and GitHub and discovering why they matter so much. Think of Git as a supercharged undo button for code, while GitHub is like a digital playground where you and your teammates can collaborate on projects. By grasping these tools, you're not just learning something new – you're arming yourself with skills that can truly elevate your game in Information Systems and Analytics
 
-# Instructions
+## Instructions
 
 You will be required to complete a series of tasks that showcase your understanding and practical application of Git and GitHub concepts. 
 Follow the steps below to successfully complete the assignment:
@@ -35,11 +38,11 @@ Follow the steps below to successfully complete the assignment:
     -	Review your pull request (or better yet, have a collaborator do it!).
 7.	Merging Changes:
     -	After receiving(or giving) approval, merge the "feature-branch" into the main/master branch through the pull request on GitHub.
-## Documentation:
+### Documentation:
 - Collect screenshots to show the branches in your repository and that they have been successfully merged
 - Include a screenshot with the closed pull request
 - Include a screenshot of at least one of the files showing the commit history
-## Submission: 
+### Submission: 
 Submit your assignment by providing the following:
 1. The URL to your remote GitHub repository.
 2. The link to your pull request on GitHub, showcasing the discussion and approval process.
@@ -48,17 +51,17 @@ Submit your assignment by providing the following:
 **Note:**
 -	If you encounter any issues or have questions during the assignment, don't hesitate to ask for assistance
 
-# Example Submission
+## Example Submission
 
-## 1. The URL to your remote GitHub repository.
+### 1. The URL to your remote GitHub repository.
 *Github repository:* [MLDERES/5713-test](https://github.com/MLDERES/5713-test) (github.com)
 
 <span style="color:red">Note:</span> if the repository isn’t public, you will need to add Peter and I as collaborators.  **Me**: mlderes, **Peter**: tuckerpete
 
-## 2. The link to your pull request on GitHub, showcasing the discussion and approval process.
+### 2. The link to your pull request on GitHub, showcasing the discussion and approval process.
 [Updated with my name by MLDERES · Pull Request #1 · MLDERES/5713-test (github.com)](https://github.com/MLDERES/5713-test/pull/1)
 
-## 3. Documentation / Screenshots
+### 3. Documentation / Screenshots
 - Collect screenshots to show the branches in your repository and that they have been successfully merged
   
 - Include a screenshot with the closed pull request
