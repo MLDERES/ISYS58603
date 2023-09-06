@@ -9,10 +9,11 @@ There are two parts to this assignment.  One for the group to complete, and one 
 - **As a group**
   - A GitHub repository which all members of the group are contributors
   - A structured, semi-structured, or unstructured files containing the data  
-  - A SQLite database with the data 
+  - A SQLite database with the data
+    - The database must have _at least_ two related tables 
   - A README.md (markdown format) file with an overview of the application
   - A description of the data in the database (i.e. data dictionary). This could be part of the README.md or another file
-    - OPTIONALLY: An entity diagram
+    - OPTIONAL (but highly encouraged): An entity diagram
   
 - **Each Individual**
   - Three queries (one query can satisfy one or more of the conditions)
@@ -50,4 +51,8 @@ Rather than give an explicit list of instructions here.  A general outline of ac
 * Another team member *should* (not required) review the changes and complete the pull request
 * Team members pull the latest changes to the local environment
             
+## Help and Hints
 
+* There is tons of publicly available data, though not much of it is in a relational format.  For instance, [this data](https://github.com/MLDERES/Py4Analytics/tree/main/book/data) is collected from publicly available sources.  Additionally, you could use a site like [mockaroo](https://mockaroo.com/) to generate portions or all of your data.  If you are really adventurous, you can use a library like [mimesis](https://mimesis.name/en/master/index.html) to get exactly what you want and skip the part about having to save it to a flat file.
+* There haven't been examples provided for putting data into a database.  You are welcome to use any methods you've seen so far (e.g. SQL inserts, Pandas or SQLAlchemy).  
+  * Extra hint:  If you do SQLAlchemy for inserts now, it will help you do the queries and the API later.
