@@ -36,6 +36,7 @@ Rather than give an explicit list of instructions here.  A general outline of ac
 * Create a group repository on GitHub.  Ensure all members have access.
 * One member creates the basic structure of the repository.  
   * Have a look through GitHub for some ideas of good structures.
+  * OR, follow Peter's example structure
   * OR, ask one of your favorite GenerativeAI tools to give you an example
   * OR, check out the documentation for Flask 
 * Be sure to add the common files.This includes:
@@ -55,4 +56,4 @@ Rather than give an explicit list of instructions here.  A general outline of ac
 
 * There is tons of publicly available data, though not much of it is in a relational format.  For instance, [this data](https://github.com/MLDERES/Py4Analytics/tree/main/book/data) is collected from publicly available sources.  Additionally, you could use a site like [mockaroo](https://mockaroo.com/) to generate portions or all of your data.  If you are really adventurous, you can use a library like [mimesis](https://mimesis.name/en/master/index.html) to get exactly what you want and skip the part about having to save it to a flat file.
 * There haven't been examples provided for putting data into a database.  You are welcome to use any methods you've seen so far (e.g. SQL inserts, Pandas or SQLAlchemy).  
-  * Extra hint:  If you do SQLAlchemy for inserts now, it will help you do the queries and the API later.
+  * **Extra hint**:  If you do SQLAlchemy for inserts now, it will help you do the queries and the API later.
