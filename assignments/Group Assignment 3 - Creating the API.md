@@ -8,47 +8,47 @@ This assignment will be assessed in two stages:
 1. The design for the API will be developed
 2. The queries connected to the design will be developed.
 
-The design for the API should meet all of the requirements outlined here.  The implementation should be complete (it works completely) for at least one of the GET methods.  The other methods can be defined with placeholders.
+The design for the API should meet all of the requirements outlined here.  The implementation should be complete (it works completely) for at least one of the GET methods.  The other methods can be defined with placeholders.  Documentation needs to be provided for each of the paths
 
-GET - at least one for every table (not mapping tables)
+GET - at least one for every table (except mapping tables)
 - Get all (must have a filter) LIMIT
 - Get one by one
 - Get that spans multiple times
 
-One for each table
-POST
-PUT
-DELETE
-
-Sample documentation for each call
-
+These don't have to be for every table, only the tables where it makes sense
+* POST - Create a new entity for your database (can be a single table or multiple tables)
+* PUT - Update an entity in your database
+* DELETE - Remove an entity from your database
 
 ## Background
+You are building an API to access the data in the database you have developed.  Your API can be **focused** on getting data into the database or out of the database (most likely out of the database).  Strongly consider what kinds of queries will be useful and plan ahead so that your API will offer a consistent and easy to use interface.
+
+For example consider the following:
+* You have a table of `students` and a table of `courses` and a table of `grades`.  You want to be able to get the grades for a student in a course.  You could do this in a couple of ways:
+  * You could have a path that is `/students/{student_id}/courses/{course_id}/grades` which would return the grades for the student in the course
+  * You could have a path that is `/grades` and you would pass in the student_id and course_id as parameters to the query such as `/grades?student_id=1&course_id=2`
+  * You could have a path that is `/students/{student_id}/grades` and you would pass in the course_id as a parameter to the query such as `/students/1/grades?course_id=2`
+
+All of these are valid approaches.  The first one is the most RESTful, but it is also the most complicated to implement.  The second one is the least RESTful, but it is the easiest to implement.  The third one is a compromise between the two.
+
+Whichever approach you choose, you should be consistent so that the user experience is consistent.
+
 
 ## Instructions
-Rather than give an explicit list of instructions here.  A general outline of activities is listed which you may execute in whatever order makes sense.  Also a few hints to the structure of the repository are also offered.
+Rather than give an explicit list of instructions here.  A general outline of activities is listed which you may execute in whatever order makes sense.
 
-* Create a group repository on GitHub.  Ensure all members have access.
-* One member creates the basic structure of the repository.  
-  * Have a look through GitHub for some ideas of good structures.
-  * OR, follow Peter's example structure
-  * OR, ask one of your favorite GenerativeAI tools to give you an example
-  * OR, check out the documentation for Flask 
-* Be sure to add the common files.This includes:
-  * README.md
-  * File with the scripts to import the data into the database
-  * The newly created database file (from the scripts)
-  * The raw data used to create the database
-  * Anything else that seems appropriate
-* Each team member pulls the latest and creates a feature branch
-* Push the feature branch to the remote repository
-* Each team member develops and commits their changes locally
-* When ready, push the commits to the server and open a pull request
-* Another team member *should* (not required) review the changes and complete the pull request
-* Team members pull the latest changes to the local environment
-            
+* Develop your plan.  
+  * Which tables are going to be static and should only need to be queried?            
+  * Which tables/entities are going to make sense for updating and deleting?
+  * How do you want to expose queries for the different entities?
+* Document your paths in your README.md or HOWTO.md and in the comments (using [docstrings](https://www.programiz.com/python-programming/docstrings))
+* Create your paths and the associated functions in the controller
+  * If you just create the shell of the function, then the content can be `pass` to make it a syntactically correct python
+  ```python
+  @app.get(/items/{item_id})
+  def collect_item_by_id(item_id):
+    pass
+  ```
+* Connect the methods associated with the paths to the queries you have built in the `model`
+
 ## Help and Hints
-
-* There is tons of publicly available data, though not much of it is in a relational format.  For instance, [this data](https://github.com/MLDERES/Py4Analytics/tree/main/book/data) is collected from publicly available sources.  Additionally, you could use a site like [mockaroo](https://mockaroo.com/) to generate portions or all of your data.  If you are really adventurous, you can use a library like [mimesis](https://mimesis.name/en/master/index.html) to get exactly what you want and skip the part about having to save it to a flat file.
-* There haven't been examples provided for putting data into a database.  You are welcome to use any methods you've seen so far (e.g. SQL inserts, Pandas or SQLAlchemy).  
-  * **Extra hint**:  If you do SQLAlchemy for inserts now, it will help you do the queries and the API later.
