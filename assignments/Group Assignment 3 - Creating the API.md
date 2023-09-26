@@ -54,24 +54,9 @@ Rather than give an explicit list of instructions here.  A general outline of ac
 * Connect the methods associated with the paths to the queries you have built in the `model`
 
 ## Help and Hints
-The code below shows how to use the flask package to develop your API.  The code below is a simple example of how to create a path that will return a list of all of the students in the database.
+We have created a few examples to help you visualize how to go about developing your application.  These examples are not complete, but they should give you a good idea of how to get started.
 
-```python
-from flask import Flask
-from flask import jsonify
-from flask import request
-from controller import get_all_students, select_student_by_id
-app = Flask(__name__) 
-
-@app.route('/students', methods=['GET'])
-def get_students():
-    # Get the list of students from the database
-    # Return the list of students as a JSON object
-    return jsonify(get_all_students())
-
-@app.route('/students/<int:student_id>', methods=['GET'])
-def get_student_by_id(student_id):
-    # Get the student from the database
-    # Return the student as a JSON object
-    return jsonify(select_student_by_id(student_id))
-``` 
+In the examples folder
+- basic-flask.py - This is a very basic example of how to use Flask to create an API.  It connects to the database and shows the basic examples for each of the 4 verbs (GET, POST, PUT, DELETE)
+- advanced-flask.py - this is a more advanced Flask example.  Providing more examples of how to use the different verbs and how to use parameters in the path and in the query string.
+- fast-api.py - this is an example of how to use FastAPI to create an API.  It connects to the database and shows the basic examples for each of the 4 verbs (GET, POST, PUT, DELETE), but it leverages the ORM to make it easier to work with the database.

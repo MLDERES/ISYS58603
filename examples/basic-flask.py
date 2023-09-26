@@ -4,18 +4,25 @@ from flask import request
 import sqlite3
 from pathlib import Path
 
+###
+# Setup
+###
 app = Flask(__name__) 
-print (app)
 DB_PATH = Path.cwd() 
 DATABASE_FILE = DB_PATH / 'examples'/'chinook.db'
 
+###
+# Routes
+###
 @app.route('/')
 def index():
     return 'Hello, World!'
 
 @app.route('/customers', methods=['GET'])
 def get_customers():
-    # Get all customers from the database
+    '''
+    Get all customers from the database
+    '''
     all_customers = select_all_customers()
     # Return the customers as a JSON object
     return jsonify(all_customers)
@@ -93,6 +100,9 @@ def delete_customer(id):
     '''
     return jsonify(remove_customer(id))
 
+####
+# Database functions
+####
 def select_all_customers():
     ''' Get all customers from the database
     '''
@@ -141,7 +151,6 @@ def insert_customer(customer):
     print(cur.lastrowid)
     conn.close()
 
-# Update an existing customer in the database
 def update_customer(customer):
     '''
     Gather the new data and update the existing record with this customer info
@@ -226,7 +235,10 @@ def update_customer(customer):
     return cur.fetchone()
 
 def remove_customer(id):
-    ''' Remove a customer record from the database when provided with the customer id
+    ''' 
+    Remove a customer record from the database when provided with the customer id
+    
+    params: id - the id of the customer to remove
     '''
     conn = sqlite3.connect(DATABASE_FILE)
     cur = conn.cursor()
@@ -234,8 +246,11 @@ def remove_customer(id):
     conn.commit()
     return {'success':True}
     
-# This says: if this file is run directly, then run the Flask app
+###
+# Main
+###
 if __name__ == '__main__':
+    # This says: if this file is run directly, then run the Flask app
     app.run(debug=False, use_reloader=False, passthrough_errors=True)
     
 
