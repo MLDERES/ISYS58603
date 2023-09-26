@@ -33,6 +33,8 @@ All of these are valid approaches.  The first one is the most RESTful, but it is
 
 Whichever approach you choose, you should be consistent so that the user experience is consistent.
 
+### Testing the API
+While not required for this assignment, it is strongly recommended that you use a tool like [Postman](https://www.postman.com/) to test your API.  This will allow you to test the API without having to write a client for it.  You can also use the browser to test the API, but it is not as flexible as Postman.
 
 ## Instructions
 Rather than give an explicit list of instructions here.  A general outline of activities is listed which you may execute in whatever order makes sense.
@@ -52,3 +54,24 @@ Rather than give an explicit list of instructions here.  A general outline of ac
 * Connect the methods associated with the paths to the queries you have built in the `model`
 
 ## Help and Hints
+The code below shows how to use the flask package to develop your API.  The code below is a simple example of how to create a path that will return a list of all of the students in the database.
+
+```python
+from flask import Flask
+from flask import jsonify
+from flask import request
+from controller import get_all_students, select_student_by_id
+app = Flask(__name__) 
+
+@app.route('/students', methods=['GET'])
+def get_students():
+    # Get the list of students from the database
+    # Return the list of students as a JSON object
+    return jsonify(get_all_students())
+
+@app.route('/students/<int:student_id>', methods=['GET'])
+def get_student_by_id(student_id):
+    # Get the student from the database
+    # Return the student as a JSON object
+    return jsonify(select_student_by_id(student_id))
+``` 

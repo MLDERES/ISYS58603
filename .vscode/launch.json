@@ -11,6 +11,23 @@
             "request": "attach",
             "processId": "${command:pickProcess}",
             "justMyCode": true
+        },
+        {
+            "name": "Python: Flask",
+            "type": "python",
+            "request": "launch",
+            "module": "examples.basic-flask",
+            "env": {
+                "FLASK_APP": "basic-flask",
+                "FLASK_ENV": "development",
+                "FLASK_DEBUG": "1"
+            },
+            "args": [
+                // "run",
+                // "--no-debugger",
+                // "--no-reload"
+            ],
+            "jinja": true
         }
     ]
 }
