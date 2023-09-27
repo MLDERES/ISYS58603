@@ -12,8 +12,10 @@ The design for the API should meet all of the requirements outlined here.  The i
 
 GET - at least one for every table (except mapping tables)
 - Get all (must have a filter) LIMIT
+  - (e.g. https://localhost:5000/customers?limit=10)
 - Get one by one
-- Get that spans multiple times
+  - (e.g. https://localhost:5000/customers/1)
+- Get that spans multiple tables
 
 These don't have to be for every table, only the tables where it makes sense
 * POST - Create a new entity for your database (can be a single table or multiple tables)
@@ -45,7 +47,7 @@ Rather than give an explicit list of instructions here.  A general outline of ac
   * How do you want to expose queries for the different entities?
 * Document your paths in your README.md or HOWTO.md and in the comments (using [docstrings](https://www.programiz.com/python-programming/docstrings))
 * Create your paths and the associated functions in the controller
-  * If you just create the shell of the function, then the content can be `pass` to make it a syntactically correct python
+  * If you just create the shell of the function, then the content can be `pass` to make it a syntactically correct python.  This can be used as a placeholder until you are ready to implement the function.
   ```python
   @app.get(/items/{item_id})
   def collect_item_by_id(item_id):
@@ -54,9 +56,9 @@ Rather than give an explicit list of instructions here.  A general outline of ac
 * Connect the methods associated with the paths to the queries you have built in the `model`
 
 ## Help and Hints
-We have created a few examples to help you visualize how to go about developing your application.  These examples are not complete, but they should give you a good idea of how to get started.
+We have created a few examples to help you visualize how to go about developing your application.  These examples are not complete, but they should give you a good idea of how to get started.  Make sure to consult the README.md in the examples folder for more information.
 
 In the examples folder
-- basic-flask.py - This is a very basic example of how to use Flask to create an API.  It connects to the database and shows the basic examples for each of the 4 verbs (GET, POST, PUT, DELETE)
-- advanced-flask.py - this is a more advanced Flask example.  Providing more examples of how to use the different verbs and how to use parameters in the path and in the query string.
-- fast-api.py - this is an example of how to use FastAPI to create an API.  It connects to the database and shows the basic examples for each of the 4 verbs (GET, POST, PUT, DELETE), but it leverages the ORM to make it easier to work with the database.
+- **basic-flask.py** - This is a very basic example of how to use Flask to create an API.  It connects to the database and shows the basic examples for each of the 4 verbs (GET, POST, PUT, DELETE)
+- **advanced-flask.py** - this is a more advanced Flask example.  Providing more examples of how to use the different verbs and how to use parameters in the path and in the query string.
+- **fast-api.py** - this is an example of how to use FastAPI to create an API.  It connects to the database and shows the basic examples for each of the 4 verbs (GET, POST, PUT, DELETE), but it leverages the ORM to make it easier to work with the database.
