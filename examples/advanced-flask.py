@@ -1,18 +1,18 @@
 from flask import Flask
 from flask import jsonify, request
-
 import sqlite3
 from pathlib import Path
 
+###
+# Setup
+###
 app = Flask(__name__) 
 DB_PATH = Path.cwd() 
-DATABASE_FILE = DB_PATH / 'assignments'/'chinook.db'
+DATABASE_FILE = DB_PATH / 'examples'/'chinook.db'
 
-@app.route('/')
-def index():
-    return 'Hello, World!'
-
-
+###
+# Error Handling
+###
 class InvalidAPIUsage(Exception):
     status_code = 400
 
@@ -32,59 +32,126 @@ class InvalidAPIUsage(Exception):
 def invalid_api_usage(e):
     return jsonify(e.to_dict())
 
+###
+# Routes
+###
+@app.route('/')
+def index():
+    return 'Hello, World!'
+
 @app.route('/customers', methods=['GET'])
 def get_customers():
-    # Get all customers from the database
+    '''
+    Get customers from the database
+    
+    Support for query arguments:
+    limit:  The maximum number of customers to return
+    start:  The starting customer id
+    
+    Example:
+    https://localhost:5000/customers?limit=10
+    https://localhost:5000/customers?start=1&limit=20    
+    '''
     limit = int(request.args.get('limit',-1))
-    all_customers = select_all_customers(limit)
+    start = int(request.args.get('start',0))
+    
+    # We are going to assume we want all the values, starting at 0
+    all_customers = select_customers(start, limit)
     # Return the customers as a JSON object
     return jsonify(all_customers)
 
-@app.route('/customers', methods=['POST'])
-def create_customer():
-    # Create a new customer with the data from the request
-    # Return the new customer as a JSON object
-    new_customer = request.get_json()
-    insert_customer(new_customer)
-    return jsonify(new_customer)
+@app.route('/invoices', methods=['GET'])
+def get_invoices():
+    '''
+    Get invoices from the database
+    
+    Support for query arguments:
+    limit:  The maximum number of invoices to return
+    start:  The starting invoice id
+    
+    Example:
+    https://localhost:5000/invoices?limit=10
+    https://localhost:5000/invoices?start=1&limit=20    
+    '''
+    limit = int(request.args.get('limit',-1))
+    start = int(request.args.get('start',0))
+    
+    # We are going to assume we want all the values, starting at 0
+    all_invoices = select_invoices(start, limit)
+   
+    # Return the invoices as a JSON object
+    return jsonify(all_invoices)
 
-@app.route('/customers/<int:id>', methods=['GET'])
-def get_customer(id):
-    # Get a single customer from the database
-    # Return the customer as a JSON object
-    customer = select_customer(id)
-    return jsonify(customer)
 
-def select_all_customers(limit):
+####
+# Database functions
+####
+def select_customers(start, limit):
+    '''
+    Query for customers starting at the start index, and returning limit number of customers
+    
+    params: start - the starting customer id
+            limit - the max number of records to return
+    '''
     conn = sqlite3.connect(DATABASE_FILE)
     cur = conn.cursor()
-    # Get column names from the sales table
-    cur.execute('SELECT * FROM customers')
+        
     if (limit > 0):
-        cur.execute('SELECT * FROM customers LIMIT ?', (limit,))
+        cur.execute('SELECT * FROM customers LIMIT ? OFFSET ?', (limit, start))
     else:
-        cur.execute('SELECT * FROM customers')
+        cur.execute('SELECT * FROM customers WHERE CustomerId >= ?',(str(start)))
     return cur.fetchall()
 
-def select_customer(id):
+def select_invoices(start, limit):
+    '''
+    Query for invoices starting at the start index, and returning limit number of invoices
+    
+    params: start - the starting customer id
+            limit - the max number of records to return
+    '''
     conn = sqlite3.connect(DATABASE_FILE)
     cur = conn.cursor()
-    # Get column names from the sales table
-    cur.execute('SELECT * FROM customers WHERE CustomerId = ?', (id,))
-    return cur.fetchone()
 
-# Query all the tables in the database
-def select_all_tables():
-    conn = sqlite3.connect(DATABASE_FILE)
-    cur = conn.cursor()
-    # Query all the tables in the database
-    cur.execute("SELECT name FROM sqlite_master WHERE type='table';")
-    return cur.fetchall()
-
-# Insert a new customer into the database
-def insert_customer(customer):
-    # This is a placeholder for now
-    pass
-
+    query = """
+        SELECT invoices.InvoiceId, invoices.CustomerId, invoices.InvoiceDate, invoice_items.InvoiceLineId, invoice_items.TrackId, invoice_items.UnitPrice, invoice_items.Quantity
+        FROM invoices JOIN invoice_items on invoices.invoiceId = invoice_items.invoiceId
+    """    
+    if (limit > 0):
+        cur.execute(query + " LIMIT ? OFFSET ?", (limit, start))
+    else:
+        cur.execute(query + " WHERE invoices.InvoiceId >= ?",(str(start)))
+    
+    rows = cur.fetchall()
+    
+    # Structure the data
+    invoices = {}
+    
+    # Loop through each row and put the data into the dictionary
+    # Start by unpacking the row tuple
+    for row in rows:
+        invoiceId, customerId, invoiceDate, invoiceLineId, trackId, unitPrice, quantity = row
+        # Find the invoice in the dictionary
+        if invoiceId not in invoices:
+            invoices[invoiceId] = {
+                'invoiceId': invoiceId,
+                'customerId': customerId,
+                'invoiceDate': invoiceDate,
+                'invoiceItems': []
+            }
+        # Add the invoice details to the invoice
+        invoices[invoiceId]['invoiceItems'].append({
+            'invoiceLineId': invoiceLineId,
+            'trackId': trackId,
+            'unitPrice': unitPrice,
+            'quantity': quantity
+        })
+    
+    return list(invoices.values())
+    
+    
+    
+###
+# Main
+###
 if __name__ == '__main__':
     app.run(debug=True)

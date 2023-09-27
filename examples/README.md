@@ -57,4 +57,39 @@ This code just says, if you execute the file directly (using `python basic-flask
 
 ### advanced-flask.py
 
-  
+In the advanced-flask example, we add a few more features.  To keep the code to a minimum, we haven't added any of the functionality from the basic-flask example.  Instead, we've added a few more features that you might find useful.
+
+#### start and limit parameters
+The first feature we've added is the ability to specify a start and limit parameter.  This allows you to page through the results.  For example, if you wanted to get the first 10 customers, you would use the following URL:
+```
+https://localhost:5000/customers?limit=10
+```
+If you wanted to get the next 10 customers, you would use the following URL:
+```
+https://localhost:5000/customers?start=10&limit=10
+```
+Notice that the start parameter is 0 based.  So the first 10 customers are returned when start=0 and limit=10.  The next 10 customers are returned when start=10 and limit=10.  The next 10 customers are returned when start=20 and limit=10.  And so on.
+
+This is a very common pattern in REST APIs.  It allows you to page through the results.  You can also use this pattern to implement infinite scrolling in a web application.  Additionally, it is helpful to limit the results provided by the API.  This prevents the API from returning too much data and overwhelming the client.  This can be done by setting a reasonable limit in the API itself.
+
+#### Nested results
+The second feature we've added is the ability to return nested results.  For example, if you wanted to get a list of all invoices and their invoice details, you would use the following URL:
+```
+https://localhost:5000/invoices
+```
+This requires a table join for the results, but then we have to manually unwind the single record we get for each invoice into multiple records.
+
+#### Advanced syntax
+When using long strings in our code, like SQL statements, it can be helpful to use the triple quote syntax.  This allows you to write the string on multiple lines.  For example, the following two statements are equivalent:
+```python
+sql = "SELECT * FROM customers"
+sql = """SELECT * 
+         FROM customers
+      """
+```
+The second example is easier to read and maintain.  This is especially true when you have a long SQL statement.
+
+#### Error handling
+In the advanced example, we've added some basic error handling.  This is a good practice to follow.  It is important to return the correct HTTP status code when an error occurs.  This allows the client to handle the error appropriately.  For example, if the client receives a 404 status code, it knows that the resource it requested was not found.  If the client receives a 500 status code, it knows that an internal server error occurred.  The client can then handle the error appropriately.
+
+In our case, we provide a InvalidAPIUsage exception which is raised when an error occurs.  This exception takes a message and a status code.  The message is returned to the client as part of the response.  The status code is used to set the HTTP status code.  This allows us to return a 404 status code when a resource is not found, a 500 status code when an internal server error occurs, and so on.
