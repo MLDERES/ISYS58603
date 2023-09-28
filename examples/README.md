@@ -2,9 +2,7 @@
 
 This folder contains examples which can provide guidance for some of the assignments.  Please keep in mind Academic Integrity guidelines when using these examples.
 
-## Contents
-
-### basic-flask.py
+## basic-flask.py
 This is an example of how to write an API using Flask. This example shows how to get/post and delete customers from the chinook database.  In order to run this example, 
 you will need to install the following packages:
 * flask
@@ -55,11 +53,11 @@ if __name__ == '__main__':
 ```
 This code just says, if you execute the file directly (using `python basic-flask.py`), then run the Flask app.  If you import this file into another file, then this code will not execute.  This is a common pattern in Python.
 
-### advanced-flask.py
+## advanced-flask.py
 
 In the advanced-flask example, we add a few more features.  To keep the code to a minimum, we haven't added any of the functionality from the basic-flask example.  Instead, we've added a few more features that you might find useful.
 
-#### start and limit parameters
+### start and limit parameters
 The first feature we've added is the ability to specify a start and limit parameter.  This allows you to page through the results.  For example, if you wanted to get the first 10 customers, you would use the following URL:
 ```
 https://localhost:5000/customers?limit=10
@@ -72,14 +70,14 @@ Notice that the start parameter is 0 based.  So the first 10 customers are retur
 
 This is a very common pattern in REST APIs.  It allows you to page through the results.  You can also use this pattern to implement infinite scrolling in a web application.  Additionally, it is helpful to limit the results provided by the API.  This prevents the API from returning too much data and overwhelming the client.  This can be done by setting a reasonable limit in the API itself.
 
-#### Nested results
+### Nested results
 The second feature we've added is the ability to return nested results.  For example, if you wanted to get a list of all invoices and their invoice details, you would use the following URL:
 ```
 https://localhost:5000/invoices
 ```
 This requires a table join for the results, but then we have to manually unwind the single record we get for each invoice into multiple records.
 
-#### Advanced syntax
+### Advanced syntax
 When using long strings in our code, like SQL statements, it can be helpful to use the triple quote syntax.  This allows you to write the string on multiple lines.  For example, the following two statements are equivalent:
 ```python
 sql = "SELECT * FROM customers"
@@ -89,7 +87,66 @@ sql = """SELECT *
 ```
 The second example is easier to read and maintain.  This is especially true when you have a long SQL statement.
 
-#### Error handling
+### Error handling
 In the advanced example, we've added some basic error handling.  This is a good practice to follow.  It is important to return the correct HTTP status code when an error occurs.  This allows the client to handle the error appropriately.  For example, if the client receives a 404 status code, it knows that the resource it requested was not found.  If the client receives a 500 status code, it knows that an internal server error occurred.  The client can then handle the error appropriately.
 
 In our case, we provide a InvalidAPIUsage exception which is raised when an error occurs.  This exception takes a message and a status code.  The message is returned to the client as part of the response.  The status code is used to set the HTTP status code.  This allows us to return a 404 status code when a resource is not found, a 500 status code when an internal server error occurs, and so on.
+
+## fastapi-example.py
+This is an example of how to write an API using FastAPI. This example shows how to get/post and delete customers from the chinook database.  In order to run this example,
+you will need to install the following packages:
+* fastapi
+* uvicorn
+* sqlalchemy (2.0.0)
+
+Once you have installed the packages, you can run the example by executing the following command:
+```
+uvicorn fastapi-example:app --reload
+```
+
+With the application running in a terminal, you'll need to connect to the application using an endpoint such as web browser or Postman.  The following endpoints are available:
+* http://localhost:5000/tracks - GET - Returns a list of all tracks in the database
+  * This supports the start and limit parameters as query parameters
+  * http://localhost:5000/tracks?start=10&limit=10
+* http://localhost:5000/tracks/{id} - GET - Returns a single track by id
+* http://localhost:5000/albums - GET - Returns a list of all albums in the database
+  * This supports the start and limit parameters as query parameters
+  * http://localhost:5000/albums?start=10&limit=10
+* http://localhost:5000/albums/{id} - GET - Returns a single album by id
+* http://localhost:5000/albums/{id}/tracks - GET - Returns a list of all tracks for an album
+
+  
+
+At the top of file you will see some boiler plate setup code
+```python
+DATABASE_URL = "sqlite:///./chinook.db"
+Base = declarative_base()
+engine = create_engine(DATABASE_URL)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+```
+The first line creates a variable that contains the path to the database.  The second line creates a variable that contains the path to the database file.  The database file is in the examples folder and is called chinook.db.  The chinook database is a sample database that is used in many examples.  You can find more information about the chinook database [here](https://www.sqlitetutorial.net/sqlite-sample-database/)
+
+Following this we go through a bit of model setup.  It's important to setup the models first (we did this all in one file, but it really should be done in a separate model.py file or something similar).  The models are used by FastAPI to automatically generate the OpenAPI documentation.  This is a huge time saver.  You can see the OpenAPI documentation by going to http://localhost:5000/docs.  This documentation is automatically generated by FastAPI based on the models we defined.
+
+Below is an example.  Notice how we have setup the relationship to the Album model.  This allows us to automatically get the album information when we query for a track.  This is a very powerful feature of FastAPI.  It allows us to easily query for related data without having to write a bunch of code to do the joins.  This is a huge time saver.
+```python
+class Track(Base):
+    __tablename__ = 'tracks'
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String)
+    album_id = Column(Integer, ForeignKey('albums.id'))
+    ...
+
+    # Relationship with Album
+    album = relationship("Album", back_populates="tracks")
+    ...
+```
+Notice then in the routes, the available query parameters are defined as optional parameters in the method definitions.  This makes the code much easier to read and maintain.  It also allows FastAPI to automatically generate the OpenAPI documentation.  This is a huge time saver.
+
+```python
+@app.get("/tracks/")
+def read_tracks(skip: int = 0, limit: int = 10):
+    db = SessionLocal()
+    tracks = db.query(Track).offset(skip).limit(limit).all()
+    return tracks
+```
