@@ -33,7 +33,11 @@ For example consider the following:
 
 All of these are valid approaches.  The first one is the most RESTful, but it is also the most complicated to implement.  The second one is the least RESTful, but it is the easiest to implement.  The third one is a compromise between the two.
 
-Whichever approach you choose, you should be consistent so that the user experience is consistent.
+Whichever approach you choose, you should be consistent so that the user experience is consistent.  A couple things to consider:
+* Use query strings for optional parameters and also for parameters that would difficult in the path (like strings with spaces or special characters)
+* Use path parameters for required parameters
+* Use the same parameter names across all of your paths
+* Use the same HTTP verbs for the same kinds of operations (e.g. use GET for all of your queries, use POST for all of your inserts, use PUT for all of your updates, use DELETE for all of your deletes)
 
 ### Testing the API
 While not required for this assignment, it is strongly recommended that you use a tool like [Postman](https://www.postman.com/) to test your API.  This will allow you to test the API without having to write a client for it.  You can also use the browser to test the API, but it is not as flexible as Postman.
@@ -61,4 +65,4 @@ We have created a few examples to help you visualize how to go about developing 
 In the examples folder
 - **basic-flask.py** - This is a very basic example of how to use Flask to create an API.  It connects to the database and shows the basic examples for each of the 4 verbs (GET, POST, PUT, DELETE)
 - **advanced-flask.py** - this is a more advanced Flask example.  Providing more examples of how to use the different verbs and how to use parameters in the path and in the query string.
-- **fast-api.py** - this is an example of how to use FastAPI to create an API.  It connects to the database and shows the basic examples for each of the 4 verbs (GET, POST, PUT, DELETE), but it leverages the ORM to make it easier to work with the database.
+- **fast-api.py** - this is an example of how to use FastAPI to create an API.  It connects to the database and shows the basic examples for each of the 4 verbs (GET, POST, PUT, DELETE), but it leverages the SQLAlchemy ORM to make it easier to work with the database.

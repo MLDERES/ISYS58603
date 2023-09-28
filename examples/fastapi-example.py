@@ -17,6 +17,9 @@ app = FastAPI(
 
 # SQLAlchemy models
 class Track(Base):
+    '''
+    Class to represent the Track table in the Chinook database
+    '''
     __tablename__ = 'tracks'
     trackId = Column("TrackId", Integer, primary_key=True, index=True)
     name = Column(String)
@@ -35,6 +38,9 @@ class Track(Base):
 
 
 class Album(Base):
+    '''
+    Class to represent the Album table in the Chinook database
+    '''
     __tablename__ = 'albums'
     albumId = Column("AlbumId", Integer, primary_key=True, index=True)
     artistId = Column("ArtistId",Integer, ForeignKey('artists.ArtistId'))
@@ -45,6 +51,9 @@ class Album(Base):
     artist = relationship("Artist", back_populates="albums")
     
 class Artist(Base):
+    '''
+    Class to represent the Artist table in the Chinook database
+    '''
     __tablename__ = 'artists'
     artistId = Column("ArtistId", Integer, primary_key=True, index=True)
     name = Column(String)
@@ -53,6 +62,9 @@ class Artist(Base):
     albums = relationship("Album", back_populates="artist")
     
 class MediaType(Base):
+    '''
+    Class to represent the MediaType table in the Chinook database
+    '''
     __tablename__ = 'media_types'
     mediaTypeId = Column("MediaTypeId", Integer, primary_key=True, index=True)
     name = Column(String)
@@ -61,6 +73,9 @@ class MediaType(Base):
     tracks = relationship("Track", back_populates="media_type")
 
 class Genre(Base):
+    '''
+    Class to represent the Genre table in the Chinook database
+    '''
     __tablename__ = "genres"
     name = Column(String)
     genreId = Column("GenreId", Integer, primary_key=True, index=True)
@@ -115,6 +130,9 @@ def read_albums(skip: int = 0, limit: int = 10, include_tracks: bool = False):
 
 @app.get("/album/{album_id}/tracks/")
 def read_album_tracks(album_id: int):
+    '''
+    Get the tracks for a given album
+    '''
     db = SessionLocal()
     album = db.query(Album).filter(Album.albumId == album_id).first()
     album_tracks = album.tracks
@@ -127,11 +145,18 @@ def read_album_tracks(album_id: int):
 
 @app.get("/artists/")
 def read_artists(skip: int = 0, limit: int = 10, name: str = None):
+    '''
+    Get the list of artists
+    
+    - **skip**:  The number of artists to skip
+    - **limit**: The number of artists to return
+    - **name**:  The artist name to filter by
+    '''
     db = SessionLocal()
     # Start the query
     artist_query = db.query(Artist)
     # If the name parameter was provided then add to the query
-    if name:
+    if name is not None:
         artist_query = artist_query.filter(Artist.name.like(f"%{name}%"))
     # Now apply the limit and offset parameters
     artists = artist_query.offset(skip).limit(limit).all()
@@ -139,24 +164,39 @@ def read_artists(skip: int = 0, limit: int = 10, name: str = None):
 
 @app.get("/artist/{artist_id}/albums/")
 def read_artist_albums(artist_id: int):
+    '''
+    Get the albums for a given artist
+    '''
     db = SessionLocal()
     artist = db.query(Artist).filter(Artist.artistId == artist_id).first()
     if artist:
+        # Now that we found an artist, we can return the albums
         return {"artist_name": artist.name, "albums": [album.title for album in artist.albums]}
     else:
         return {"error": "Artist not found"}
     
 @app.post("/artist/")
 def create_artist(name: str):
+    '''
+    Add a new artist
+    
+    - **name**: The name of the artist
+    '''
     db = SessionLocal()
     artist = Artist(name=name)
     db.add(artist)
+    # Write the changes to the database
     db.commit()
     new_record = db.query(Artist).filter(Artist.name == name).first()
     return new_record
 
 @app.delete("/artist/")
 def delete_artist_by_name(name=None):
+    '''
+    Remove an artist by name
+    
+    - **name**: The name of the artist
+    '''
     db = SessionLocal()
     if not name:
         return {"error": "No name provided"}
@@ -170,6 +210,11 @@ def delete_artist_by_name(name=None):
     
 @app.delete("/artist/{artist_id}/")
 def delete_artist(artist_id: int):
+    '''
+    Remove an artist by ID
+    
+    - **artist_id**: The ID of the artist
+    '''
     db = SessionLocal()
     artist = db.query(Artist).filter(Artist.artistId == artist_id).first()
     if artist:
@@ -181,6 +226,12 @@ def delete_artist(artist_id: int):
 
 @app.put("/artist/{artist_id}/")
 def update_artist(name: str):
+    '''
+    Change the name of an artist
+    
+    - **artist_id**: The ID of the artist
+    - **name**: The new name of the artist
+    '''
     db = SessionLocal()
     artist = db.query(Artist).filter(Artist.artistId == artist_id).first()
     if artist:
