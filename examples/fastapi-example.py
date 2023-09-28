@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
-from sqlalchemy.orm import sessionmaker, relationship, declarative_base
+from sqlalchemy.orm import sessionmaker, relationship, declarative_base, joinedload
 
 # Database setup
 DATABASE_URL = "sqlite:///examples/chinook.db"
@@ -9,7 +9,11 @@ engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # FastAPI setup
-app = FastAPI()
+app = FastAPI(
+    title="Chinook API",
+    description="API for the Chinook music store",
+    version="0.1",
+)
 
 # SQLAlchemy models
 class Track(Base):
@@ -59,23 +63,73 @@ class MediaType(Base):
 # FastAPI routes
 ###
 @app.get("/tracks/")
-def read_tracks(skip: int = 0, limit: int = 10):
+def read_tracks(skip: int = 0, limit: int = 10, band: str = None, name: str = None, genre: str = None):
+    '''
+    ## Get the list of tracks
+    
+    - **skip**:  The number of albums to skip
+    - **limit**: The number of albums to return
+    - **band**:  The band name to filter by
+    - **name**:  The track name to filter by
+        
+    '''
     db = SessionLocal()
-    tracks = db.query(Track).offset(skip).limit(limit).all()
+    track_query = db.query(Track).join(Album).join(Artist)
+    if band:
+        track_query = track_query.filter(Artist.name.like(f"%{band}%"))
+    if name:
+        track_query = track_query.filter(Track.name.like(f"%{name}%"))
+        
+    tracks = track_query.options(joinedload(Track.media_type)).offset(skip).limit(limit).all()
     return tracks
 
 @app.get("/albums/")
-def read_albums(skip: int = 0, limit: int = 10):
+def read_albums(skip: int = 0, limit: int = 10, includeTrackDetails: bool = False):
+    '''
+    Get the list of albums, optionally including the track details for each album
+    
+    params:
+    
+        skip: int = 0
+            The number of albums to skip
+    
+        limit: int = 10
+            The number of albums to return
+    
+        includeTrackDetails: bool = False
+            Whether to include the track details for each album
+    '''
     db = SessionLocal()
-    albums = db.query(Album).offset(skip).limit(limit).all()
+    if includeTrackDetails:
+        albums = db.query(Album).options(joinedload(Album.tracks).joinedload(Track.media_type)).offset(skip).limit(limit).all()
+    else:
+        albums = db.query(Album).offset(skip).limit(limit).all()
     return albums
 
 @app.get("/album/{album_id}/tracks/")
 def read_album_tracks(album_id: int):
     db = SessionLocal()
-    album = db.query(Album).filter(Album.id == album_id).first()
+    album = db.query(Album).filter(Album.albumId == album_id).first()
     album_tracks = album.tracks
     if album:
         return {"album_title": album.title, "tracks": [track.name for track in album.tracks]}
     else:
         return {"error": "Album not found"}
+
+@app.get("/artists/")
+def read_artists(skip: int = 0, limit: int = 10, name: str = None):
+    db = SessionLocal()
+    artist_query = db.query(Artist)
+    if name:
+        artist_query = artist_query.filter(Artist.name.like(f"%{name}%"))
+    artists = artist_query.offset(skip).limit(limit).all()
+    return artists
+
+@app.get("/artist/{artist_id}/albums/")
+def read_artist_albums(artist_id: int):
+    db = SessionLocal()
+    artist = db.query(Artist).filter(Artist.artistId == artist_id).first()
+    if artist:
+        return {"artist_name": artist.name, "albums": [album.title for album in artist.albums]}
+    else:
+        return {"error": "Artist not found"}
