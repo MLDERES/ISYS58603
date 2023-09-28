@@ -1,6 +1,8 @@
 # Examples
 
-This folder contains examples which can provide guidance for some of the assignments.  Please keep in mind Academic Integrity guidelines when using these examples.
+This folder contains examples which can provide guidance for some of the assignments.  Please keep in mind Academic Integrity guidelines when using these examples.  
+
+Also, notice that full paths/urls are provided but may not match what you are using.  For example, the database path may be different on your machine.  You will need to update the code to match your environment. Also if you choose to expose the endpoint on a different port, you will need to update the code to match.
 
 ## basic-flask.py
 This is an example of how to write an API using Flask. This example shows how to get/post and delete customers from the chinook database.  In order to run this example, 
@@ -105,18 +107,40 @@ uvicorn fastapi-example:app --reload
 ```
 
 With the application running in a terminal, you'll need to connect to the application using an endpoint such as web browser or Postman.  The following endpoints are available:
-* http://localhost:5000/tracks - GET - Returns a list of all tracks in the database
-  * This supports the start and limit parameters as query parameters
-  * http://localhost:5000/tracks?start=10&limit=10
-* http://localhost:5000/tracks/{id} - GET - Returns a single track by id
+### Albums
 * http://localhost:5000/albums - GET - Returns a list of all albums in the database
   * This supports the start and limit parameters as query parameters
   * http://localhost:5000/albums?start=10&limit=10
-* http://localhost:5000/albums/{id} - GET - Returns a single album by id
-* http://localhost:5000/albums/{id}/tracks - GET - Returns a list of all tracks for an album
+  * Additionally, you can specify if you want the tracks returned as part of the album
+  * http://localhost:5000/albums?include_tracks=true
+* http://localhost:5000/albums/{album_id}/tracks - GET - Returns a single album by id with the tracks
+  * This method uses a path parameter to specify the album id
+### Tracks
+* http://localhost:5000/tracks - GET - Returns a list of all tracks in the database
+  * This supports the start and limit parameters as query parameters
+  * http://localhost:5000/tracks?start=10&limit=10
+  * Also supports the track name and band name parameter as a query parameter
+### Artists
+* http://localhost:5000/artists - GET - Returns a list of all artists in the database
+  * This supports the start and limit parameters as query parameters
+  * http://localhost:5000/artists?start=10&limit=10
+  * Additionally, you can specify if you want the artists filtered by name
+  * http://localhost:5000/artists?name=AC/DC
+* http://localhost:5000/artist/{artist_id}/albums - GET - Returns a list of all albums by an artist
+* http://localhost:5000/artist - DELETE - Deletes an artist by name
+  * This method uses a query parameter to specify the artist name
+  * http://localhost:5000/artist?name=AC/DC
+* http://localhost:5000/artist/{artist_id} - DELETE - Deletes an artist by id
+  * This method uses a path parameter to specify the artist id
+* http://localhost:5000/artist/{artist_id} - PUT - Updates an artist
+  * This method uses a query parameter to specify the artist name
+  * http://localhost:5000/artist/1?name=AC/DC
+* http://localhost:5000/artist - POST - Creates a new artist
+  * This method uses a query parameter to specify the artist name
+  * http://localhost:5000/artist?name=AC/DC
+  * 
 
-  
-
+### Breakdown
 At the top of file you will see some boiler plate setup code
 ```python
 DATABASE_URL = "sqlite:///./chinook.db"
@@ -150,3 +174,26 @@ def read_tracks(skip: int = 0, limit: int = 10):
     tracks = db.query(Track).offset(skip).limit(limit).all()
     return tracks
 ```
+
+There are a lot of concepts in this code example.  I would recommend reading through the FastAPI documentation to learn more about the features available.  You can find the documentation [here](https://fastapi.tiangolo.com/).  Also keep in mind that much of what is happening from a database perspective is due to SQLAlchemy.  You can find the SQLAlchemy documentation [here](https://docs.sqlalchemy.org/en/14/orm/tutorial.html).
+
+### Variable types
+Python is not a strongly typed language.  This means that you don't have to specify the type of a variable when you declare it.  For example, the following code is valid in Python:
+```python
+x = 1
+x = "hello"
+```
+In the first line, x is an integer.  In the second line, x is a string.  This is not allowed in many other languages.  For example, in C# the following code is not valid:
+```csharp 
+int x = 1;
+x = "hello";
+```
+This is because C# is a strongly typed language.  This means that you have to specify the type of a variable when you declare it.  Once you have declared the type, you cannot change it.  This is not the case in Python.
+
+FastAPI is built on top of Python.  This means that it is not a strongly typed language either.  However, FastAPI does provide a way to specify the type of a variable.  This is done using the colon syntax.  For example, the following code is valid in FastAPI:
+```python 
+@app.get("/tracks/")
+def read_tracks(skip: int = 0, limit: int = 10):
+    ...
+```
+In this example, we are specifying that the skip and limit parameters are integers.  This is not required, but it is a good practice to follow.  It makes the code easier to read and maintain.  It also allows FastAPI to automatically generate the OpenAPI documentation.  This can save lots of time, but also makes it easier for other developers to understand your code and catch errors early.

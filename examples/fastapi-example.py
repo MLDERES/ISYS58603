@@ -31,6 +31,7 @@ class Track(Base):
     # Relationships
     album = relationship("Album", back_populates="tracks")
     media_type = relationship("MediaType", back_populates="tracks")
+    genre = relationship("Genre", back_populates="tracks")
 
 
 class Album(Base):
@@ -59,6 +60,14 @@ class MediaType(Base):
     # Relationship with Track
     tracks = relationship("Track", back_populates="media_type")
 
+class Genre(Base):
+    __tablename__ = "genres"
+    name = Column(String)
+    genreId = Column("GenreId", Integer, primary_key=True, index=True)
+    
+    # Relationship with Track
+    tracks = relationship("Track", back_populates="genre")
+
 ###
 # FastAPI routes
 ###
@@ -67,43 +76,41 @@ def read_tracks(skip: int = 0, limit: int = 10, band: str = None, name: str = No
     '''
     ## Get the list of tracks
     
-    - **skip**:  The number of albums to skip
-    - **limit**: The number of albums to return
+    - **skip**:  The number of tracks to skip
+    - **limit**: The number of tracks to return
     - **band**:  The band name to filter by
     - **name**:  The track name to filter by
+    - **genre**: The genre to filter by
         
     '''
     db = SessionLocal()
-    track_query = db.query(Track).join(Album).join(Artist)
+    track_query = db.query(Track).join(Album).join(Artist).join(Genre)
     if band:
         track_query = track_query.filter(Artist.name.like(f"%{band}%"))
     if name:
         track_query = track_query.filter(Track.name.like(f"%{name}%"))
+    if genre:
+        track_query = track_query.filter(Genre.name.like(f"%{genre}%"))
         
-    tracks = track_query.options(joinedload(Track.media_type)).offset(skip).limit(limit).all()
+    tracks = track_query.options(joinedload(Track.media_type)).options(joinedload(Track.genre)).offset(skip).limit(limit).all()
     return tracks
 
 @app.get("/albums/")
-def read_albums(skip: int = 0, limit: int = 10, includeTrackDetails: bool = False):
+def read_albums(skip: int = 0, limit: int = 10, include_tracks: bool = False):
     '''
     Get the list of albums, optionally including the track details for each album
     
-    params:
-    
-        skip: int = 0
-            The number of albums to skip
-    
-        limit: int = 10
-            The number of albums to return
-    
-        includeTrackDetails: bool = False
+    - **skip**:  The number of albums to skip
+    - **limit**: The number of albums to return
+    - **band**:  The band name to filter by
+        include_tracks: bool = False
             Whether to include the track details for each album
     '''
     db = SessionLocal()
-    if includeTrackDetails:
-        albums = db.query(Album).options(joinedload(Album.tracks).joinedload(Track.media_type)).offset(skip).limit(limit).all()
-    else:
-        albums = db.query(Album).offset(skip).limit(limit).all()
+    album_query = db.query(Album) 
+    if include_tracks:
+        album_query = albumn_query.options(joinedload(Album.tracks).joinedload(Track.media_type))
+    albums = album_query.offset(skip).limit(limit).all()
     return albums
 
 @app.get("/album/{album_id}/tracks/")
@@ -112,6 +119,8 @@ def read_album_tracks(album_id: int):
     album = db.query(Album).filter(Album.albumId == album_id).first()
     album_tracks = album.tracks
     if album:
+        # Here we decided to dispense with the unnecessary information and just return the track name, none of the other 
+        # details (which would be the default)
         return {"album_title": album.title, "tracks": [track.name for track in album.tracks]}
     else:
         return {"error": "Album not found"}
@@ -119,9 +128,12 @@ def read_album_tracks(album_id: int):
 @app.get("/artists/")
 def read_artists(skip: int = 0, limit: int = 10, name: str = None):
     db = SessionLocal()
+    # Start the query
     artist_query = db.query(Artist)
+    # If the name parameter was provided then add to the query
     if name:
         artist_query = artist_query.filter(Artist.name.like(f"%{name}%"))
+    # Now apply the limit and offset parameters
     artists = artist_query.offset(skip).limit(limit).all()
     return artists
 
@@ -131,5 +143,49 @@ def read_artist_albums(artist_id: int):
     artist = db.query(Artist).filter(Artist.artistId == artist_id).first()
     if artist:
         return {"artist_name": artist.name, "albums": [album.title for album in artist.albums]}
+    else:
+        return {"error": "Artist not found"}
+    
+@app.post("/artist/")
+def create_artist(name: str):
+    db = SessionLocal()
+    artist = Artist(name=name)
+    db.add(artist)
+    db.commit()
+    new_record = db.query(Artist).filter(Artist.name == name).first()
+    return new_record
+
+@app.delete("/artist/")
+def delete_artist_by_name(name=None):
+    db = SessionLocal()
+    if not name:
+        return {"error": "No name provided"}
+    artist = db.query(Artist).filter(Artist.name.like(f"%{name}%")).first()
+    if artist:
+        db.delete(artist)
+        db.commit()
+        return {"message": "Artist deleted", "artist": artist}
+    else:
+        return {"error": "Artist not found"}
+    
+@app.delete("/artist/{artist_id}/")
+def delete_artist(artist_id: int):
+    db = SessionLocal()
+    artist = db.query(Artist).filter(Artist.artistId == artist_id).first()
+    if artist:
+        db.delete(artist)
+        db.commit()
+        return {"message": "Artist deleted"}
+    else:
+        return {"error": "Artist not found"}
+
+@app.put("/artist/{artist_id}/")
+def update_artist(name: str):
+    db = SessionLocal()
+    artist = db.query(Artist).filter(Artist.artistId == artist_id).first()
+    if artist:
+        artist.name = name
+        db.commit()
+        return {"message": "Artist updated"}
     else:
         return {"error": "Artist not found"}
