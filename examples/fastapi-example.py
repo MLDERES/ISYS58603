@@ -124,7 +124,7 @@ def read_albums(skip: int = 0, limit: int = 10, include_tracks: bool = False):
     db = SessionLocal()
     album_query = db.query(Album) 
     if include_tracks:
-        album_query = albumn_query.options(joinedload(Album.tracks).joinedload(Track.media_type))
+        album_query = album_query.options(joinedload(Album.tracks).joinedload(Track.media_type))
     albums = album_query.offset(skip).limit(limit).all()
     return albums
 
@@ -135,7 +135,6 @@ def read_album_tracks(album_id: int):
     '''
     db = SessionLocal()
     album = db.query(Album).filter(Album.albumId == album_id).first()
-    album_tracks = album.tracks
     if album:
         # Here we decided to dispense with the unnecessary information and just return the track name, none of the other 
         # details (which would be the default)
