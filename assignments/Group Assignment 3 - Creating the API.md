@@ -17,12 +17,12 @@ GET - at least one for every table (except mapping tables)
   - (e.g. https://localhost:5000/customers/1)
 - Get that spans multiple tables
 
-These don't have to be for every table, only the tables where it makes sense
+The following don't have to be for every table, only the tables where it makes sense, but you must have least one of each of the following:
 * POST - Create a new entity for your database (can be a single table or multiple tables)
 * PUT - Update an entity in your database
 * DELETE - Remove an entity from your database
 
-***Note be sure to TAG the commit that you want to be graded with `v2.0`, `GA3` or similar so that it's clear what you want to be evaluated***
+***<span style="color:red">NOTE:</span>be sure to TAG the commit that you want to be graded with `v2.0`, `GA3` or similar so that it's clear what you want to be evaluated***
 
 ## Background
 You are building an API to access the data in the database you have developed.  Your API can be **focused** on getting data into the database or out of the database (most likely out of the database).  Strongly consider what kinds of queries will be useful and plan ahead so that your API will offer a consistent and easy to use interface.
@@ -42,7 +42,7 @@ Whichever approach you choose, you should be consistent so that the user experie
 * Use the same HTTP verbs for the same kinds of operations (e.g. use GET for all of your queries, use POST for all of your inserts, use PUT for all of your updates, use DELETE for all of your deletes)
 
 ### Testing the API
-While not required for this assignment, it is strongly recommended that you use a tool like [Postman](https://www.postman.com/) to test your API.  This will allow you to test the API without having to write a client for it.  You can also use the browser to test the API, but it is not as flexible as Postman.
+While not required for this assignment, it is strongly recommended that you use a tool like [Postman](https://www.postman.com/) to test your API.  This will allow you to test the API without having to write a client for it.  You can also use the browser to test the API, but it is not as flexible as Postman.  (When I say not required, I mean that testing with Postman is not required.  Testing is required, but you can use whatever tool you want to test it.)
 
 ## Instructions
 Rather than give an explicit list of instructions here.  A general outline of activities is listed which you may execute in whatever order makes sense.
