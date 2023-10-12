@@ -22,6 +22,8 @@ These don't have to be for every table, only the tables where it makes sense
 * PUT - Update an entity in your database
 * DELETE - Remove an entity from your database
 
+***Note be sure to TAG the commit that you want to be graded with `v2.0`, `GA3` or similar so that it's clear what you want to be evaluated***
+
 ## Background
 You are building an API to access the data in the database you have developed.  Your API can be **focused** on getting data into the database or out of the database (most likely out of the database).  Strongly consider what kinds of queries will be useful and plan ahead so that your API will offer a consistent and easy to use interface.
 
