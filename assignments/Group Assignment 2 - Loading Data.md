@@ -4,9 +4,11 @@
 The purpose of this assignment is to help students understand how to load data into a database using Python.
 
 ## Deliverable
-There are two parts to this assignment.  One for the group to complete, and one part which is to be completed by every individual in the team.  All of the components should be a part of the single group repository which will be submitted to Blackboard.  <span style="color:red">**NOTE: If your repository is private, you'll need to invite the professors **</span> 
+There are two parts to this assignment.  One for the group to complete, and one part which is to be completed by every individual in the team.  All of the components should be a part of the single group repository which will be submitted to Blackboard.  
 
-***Note be sure to TAG the commit that you want to be graded with `v1.0`, `GA2` or similar so that it's clear what you want to be evaluated***
+***<span style="color:red">NOTE:</span> If your repository is private, you'll need to invite the professors***
+
+***<span style="color:red">NOTE2:</span> Be sure to TAG the commit that you want to be graded with `v1.0`, `GA2` or similar so that it's clear what you want to be evaluated***.  This will also allow you to continue working on your repo without worrying about it being graded in a state of flux.
 
 - **As a group**
   - A GitHub repository which all members of the group are contributors
@@ -53,10 +55,14 @@ Rather than give an explicit list of instructions here.  A general outline of ac
 * When ready, push the commits to the server and open a pull request
 * Another team member *should* (not required) review the changes and complete the pull request
 * Team members pull the latest changes to the local environment
-            
+
+* When all the pulls and syncs are complete, add a tag to the commit that you want to be graded.  This will be the commit that is graded.
+  
 ## Help and Hints
 
 * There is tons of publicly available data, though not much of it is in a relational format.  For instance, [this data](https://github.com/MLDERES/Py4Analytics/tree/main/book/data) is collected from publicly available sources.  Additionally, you could use a site like [mockaroo](https://mockaroo.com/) to generate portions or all of your data.  If you are really adventurous, you can use a library like [mimesis](https://mimesis.name/en/master/index.html) to get exactly what you want and skip the part about having to save it to a flat file.
-* There haven't been examples provided for putting data into a database.  You are welcome to use any methods you've seen so far (e.g. SQL inserts, Pandas or SQLAlchemy).  
+* There haven't been examples provided for putting data into a database.  You are welcome to use any methods you've seen so far (e.g. SQL inserts, Pandas or SQLAlchemy).
+  * The absolute simplest way to do this is to use the `sqlite3` library and write SQL statements to insert the data.  This is not the most efficient way, but it is the simplest.
+  * The next easiest way is to use Pandas to read the data and then use the `to_sql` method to write the data to the database.  This is a little more complicated, but it is more efficient.  
 * Queries should be written **as functions** in the model, therefore multiple queries can be stored in a single file.  These functions should be called from the controller.  The controller should be called from the main application.  This is the MVC pattern.  It is not required, but it is strongly encouraged.
   * **Extra hint**:  If you do SQLAlchemy for inserts now, it will help you do the queries and the API later.
