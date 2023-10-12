@@ -49,7 +49,7 @@ Rather than give an explicit list of instructions here.  A general outline of ac
   * Which tables are going to be static and should only need to be queried?            
   * Which tables/entities are going to make sense for updating and deleting?
   * How do you want to expose queries for the different entities?
-* Document your paths in your README.md or HOWTO.md and in the comments (using [docstrings](https://www.programiz.com/python-programming/docstrings))
+* Document your paths in your README.md or HOWTO.md and in the comments (using [docstrings](https://www.programiz.com/python-programming/docstrings) and/or the [OpenAPI](https://swagger.io/docs/specification/about/) specification)
 * Create your paths and the associated functions in the controller
   * If you just create the shell of the function, then the content can be `pass` to make it a syntactically correct python.  This can be used as a placeholder until you are ready to implement the function.
   ```python
@@ -66,3 +66,21 @@ In the examples folder
 - **basic-flask.py** - This is a very basic example of how to use Flask to create an API.  It connects to the database and shows the basic examples for each of the 4 verbs (GET, POST, PUT, DELETE)
 - **advanced-flask.py** - this is a more advanced Flask example.  Providing more examples of how to use the different verbs and how to use parameters in the path and in the query string.
 - **fast-api.py** - this is an example of how to use FastAPI to create an API.  It connects to the database and shows the basic examples for each of the 4 verbs (GET, POST, PUT, DELETE), but it leverages the SQLAlchemy ORM to make it easier to work with the database.
+
+If you are finding the folder structure complex, this is a simplified version of the folder structure that you can use:
+```bash
+.
+├── app.py            # this is where you would put your main application
+├── config.py         # this is where you would put your configuration information
+├── controller.py     # this is where you would put your paths
+├── data              # this is where you would put your data files
+│   ├── customers.csv
+│   └── customers.db
+├── database.py       # this is where you would put your database connection
+├── model.py          # this is where you would put your queries
+├── README.md
+├── static            # this is where you would put your static files like images, css, javascript, etc.
+└── requirements.txt  # this is where you would put your python dependencies
+
+```
+
