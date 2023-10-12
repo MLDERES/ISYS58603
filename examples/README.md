@@ -197,3 +197,17 @@ def read_tracks(skip: int = 0, limit: int = 10):
     ...
 ```
 In this example, we are specifying that the skip and limit parameters are integers.  This is not required, but it is a good practice to follow.  It makes the code easier to read and maintain.  It also allows FastAPI to automatically generate the OpenAPI documentation.  This can save lots of time, but also makes it easier for other developers to understand your code and catch errors early.
+
+
+{
+    "FirstName": "John",
+    "LastName": "Doe",
+    "Company": "Acme, Inc.",
+    "Address": "123 Main St.",
+    "City": "Anytown",
+    "State": "CA",
+    "Country": "USA",
+    "PostalCode": "12345",
+    "Phone": "555-555-5555",
+    "Fax": "555-555-5555"
+}

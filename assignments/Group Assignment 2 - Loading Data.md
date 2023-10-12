@@ -6,6 +6,8 @@ The purpose of this assignment is to help students understand how to load data i
 ## Deliverable
 There are two parts to this assignment.  One for the group to complete, and one part which is to be completed by every individual in the team.  All of the components should be a part of the single group repository which will be submitted to Blackboard.  <span style="color:red">**NOTE: If your repository is private, you'll need to invite the professors **</span> 
 
+***Note be sure to TAG the commit that you want to be graded with `v1.0`, `GA2` or similar so that it's clear what you want to be evaluated***
+
 - **As a group**
   - A GitHub repository which all members of the group are contributors
   - A structured, semi-structured, or unstructured files containing the data  
