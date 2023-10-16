@@ -10,7 +10,7 @@ from pathlib import Path
 app = Flask(__name__) 
 CORS(app)
 DB_PATH = Path.cwd() 
-DATABASE_FILE = DB_PATH / 'examples'/'chinook.db'
+DATABASE_FILE = DB_PATH / 'chinook.db'
 
 ###
 # Error Handling
