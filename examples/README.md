@@ -126,18 +126,18 @@ With the application running in a terminal, you'll need to connect to the applic
   * http://localhost:5000/artists?start=10&limit=10
   * Additionally, you can specify if you want the artists filtered by name
   * http://localhost:5000/artists?name=AC/DC
-* http://localhost:5000/artist/{artist_id}/albums - GET - Returns a list of all albums by an artist
-* http://localhost:5000/artist - DELETE - Deletes an artist by name
+* http://localhost:5000/artists/{artist_id}/albums - GET - Returns a list of all albums by an artist
+* http://localhost:5000/artists - DELETE - Deletes an artist by name
   * This method uses a query parameter to specify the artist name
-  * http://localhost:5000/artist?name=AC/DC
-* http://localhost:5000/artist/{artist_id} - DELETE - Deletes an artist by id
+  * http://localhost:5000/artists?name=AC/DC
+* http://localhost:5000/artists/{artist_id} - DELETE - Deletes an artist by id
   * This method uses a path parameter to specify the artist id
-* http://localhost:5000/artist/{artist_id} - PUT - Updates an artist
+* http://localhost:5000/artists/{artist_id} - PUT - Updates an artist
   * This method uses a query parameter to specify the artist name
-  * http://localhost:5000/artist/1?name=AC/DC
-* http://localhost:5000/artist - POST - Creates a new artist
+  * http://localhost:5000/artists/1?name=AC/DC
+* http://localhost:5000/artists - POST - Creates a new artist
   * This method uses a query parameter to specify the artist name
-  * http://localhost:5000/artist?name=AC/DC
+  * http://localhost:5000/artists?name=AC/DC
   * 
 
 ### Breakdown

@@ -1,13 +1,16 @@
 from flask import Flask
 from flask import jsonify
 from flask import request
+from flask_cors import CORS
 import sqlite3
 from pathlib import Path
 
 ###
+
 # Setup
 ###
 app = Flask(__name__) 
+CORS(app)
 DB_PATH = Path.cwd() 
 DATABASE_FILE = DB_PATH / 'examples'/'chinook.db'
 

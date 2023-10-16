@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import sessionmaker, relationship, declarative_base, joinedload
 
@@ -13,6 +15,21 @@ app = FastAPI(
     title="Chinook API",
     description="API for the Chinook music store",
     version="0.1",
+)
+# CORS setup (cross-origin scripting)
+origins = [
+    "http://localhost:8081",
+    "file://", # Replace with the port your frontend is running on
+]
+
+#  This is required to allow scripts to be called from ports other than the one we are exposing the API on
+app.add_middleware(
+    CORSMiddleware,
+    # This is not a great idea in production, but it's fine for development
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # SQLAlchemy models
@@ -161,7 +178,16 @@ def read_artists(skip: int = 0, limit: int = 10, name: str = None):
     artists = artist_query.offset(skip).limit(limit).all()
     return artists
 
-@app.get("/artist/{artist_id}/albums/")
+@app.get("/artists/{artist_id}/")
+def read_artist(artist_id:int = -9999):
+    '''
+    Get a particular artist
+    '''
+    db = SessionLocal()
+    artist = db.query(Artist).filter(Artist.artistId == artist_id).first()
+    return artist
+
+@app.get("/artists/{artist_id}/albums/")
 def read_artist_albums(artist_id: int):
     '''
     Get the albums for a given artist
@@ -174,7 +200,7 @@ def read_artist_albums(artist_id: int):
     else:
         return {"error": "Artist not found"}
     
-@app.post("/artist/")
+@app.post("/artists/")
 def create_artist(name: str):
     '''
     Add a new artist
@@ -189,7 +215,7 @@ def create_artist(name: str):
     new_record = db.query(Artist).filter(Artist.name == name).first()
     return new_record
 
-@app.delete("/artist/")
+@app.delete("/artists/")
 def delete_artist_by_name(name=None):
     '''
     Remove an artist by name
@@ -207,7 +233,7 @@ def delete_artist_by_name(name=None):
     else:
         return {"error": "Artist not found"}
     
-@app.delete("/artist/{artist_id}/")
+@app.delete("/artists/{artist_id}/")
 def delete_artist(artist_id: int):
     '''
     Remove an artist by ID
@@ -223,7 +249,7 @@ def delete_artist(artist_id: int):
     else:
         return {"error": "Artist not found"}
 
-@app.put("/artist/{artist_id}/")
+@app.put("/artists/{artist_id}/")
 def update_artist(name: str):
     '''
     Change the name of an artist
