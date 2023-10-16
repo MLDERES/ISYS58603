@@ -64,7 +64,7 @@ Rather than give an explicit list of instructions here.  A general outline of ac
 ## Help and Hints
 We have created a few examples to help you visualize how to go about developing your application.  These examples are not complete, but they should give you a good idea of how to get started.  Make sure to consult the README.md in the examples folder for more information.
 
-In the examples folder
+In the [examples folder](examples/README.md)
 - **basic-flask.py** - This is a very basic example of how to use Flask to create an API.  It connects to the database and shows the basic examples for each of the 4 verbs (GET, POST, PUT, DELETE)
 - **advanced-flask.py** - this is a more advanced Flask example.  Providing more examples of how to use the different verbs and how to use parameters in the path and in the query string.
 - **fast-api.py** - this is an example of how to use FastAPI to create an API.  It connects to the database and shows the basic examples for each of the 4 verbs (GET, POST, PUT, DELETE), but it leverages the SQLAlchemy ORM to make it easier to work with the database.
@@ -82,6 +82,8 @@ If you are finding the folder structure complex, this is a simplified version of
 ├── model.py          # this is where you would put your queries
 ├── README.md
 ├── static            # this is where you would put your static files like images, css, javascript, etc.
+│   ├── helper.js
+│   └── image.png
 └── requirements.txt  # this is where you would put your python dependencies
 
 ```
