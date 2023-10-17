@@ -57,7 +57,7 @@ def post_customer():
             "PostalCode": "12345",
             "Phone": "555-555-5555",
             "Fax": "555-555-5555",
-            "Email": "
+            "Email": ""
         }   
     '''
     new_customer = request.get_json()
