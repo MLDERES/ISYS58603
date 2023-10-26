@@ -13,12 +13,48 @@ The objective of this assignment is to provide you with hands-on experience in c
   
 ## Group Assignments
 (../assignments/01 - Group Project Overview.md)[Group Project Overview] 
+* [Group Assignment 2](assignments/Group_Assignment_2_Loading_Data.md) - The purpose of this assignment is to help students understand how to load data into a database using Python.
 
 ```mermaid
 graph TD
-    E[Database] -->|DB Data| C[API]
-    C -->|HTTP Response| A[Webpage]
-    C -->|HTTP Response| B[Jupyter Notebook]
-    C -->|HTTP Response| D[Console App]
-
+    subgraph "GA2"
+        E[Database]<-->|DB Data| F[API DB Access]
+    end
+    F <-->|Filtered data| G[API Endpoints]
+    G <-->|HTTP| A[Webpage]
+    G <-->|HTTP| B[Jupyter Notebook]
+    G <-->|HTTP| D[Console App]
 ```
+* [Group Assignment 3](assignments/Group_Assignment_3_Creating_the_API.md) - The purpose of this assignment is to give students the opportunity to design and develop an API which will be able to interact with the database.
+
+```mermaid
+graph TD
+    E[Database] <-->|DB Data| F[API DB Access]
+    subgraph "GA3"
+        F <-->|Filtered data| G[API Endpoints]    
+    end
+    G <-->|HTTP| A[Webpage]
+    G <-->|HTTP| B[Jupyter Notebook]
+    G <-->|HTTP| D[Console App]
+```
+
+* [Group Assignment 4](assignments/Group_Assignment_4_Putting_front-end_on_the_API.md) - The purpose of this assignment is to give students the opportunity to design and develop an API which will be able to interact with the database.
+
+
+```mermaid
+graph TD
+    E[Database] <-->|DB Data| F[API DB Access]
+    F <-->|Filtered data| G[API Endpoints]    
+    
+        G <-->|HTTP| A[Webpage]
+        G <-->|HTTP| B[Jupyter Notebook]
+        G <-->|HTTP| D[Console App]
+    subgraph "GA4"
+        A
+        B
+        D
+    end
+```
+
+
+  
