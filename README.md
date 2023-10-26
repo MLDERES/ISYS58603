@@ -14,15 +14,11 @@ The objective of this assignment is to provide you with hands-on experience in c
 ## Group Assignments
 (../assignments/01 - Group Project Overview.md)[Group Project Overview] 
 
-
 ```mermaid
 graph TD
-    A[Webpage] -->|HTTP Request| C[API]
-    B[Jupyter Notebook] -->|HTTP Request| C[API]
-    D[Console App] -->|HTTP Request| C[API]
-    C -->|DB Query| E[Database]
-    E -->|DB Response| C
-    C -->|HTTP Response| A
-    C -->|HTTP Response| B
-    C -->|HTTP Response| D
+    E[Database] -->|DB Data| C[API]
+    C -->|HTTP Response| A[Webpage]
+    C -->|HTTP Response| B[Jupyter Notebook]
+    C -->|HTTP Response| D[Console App]
+
 ```
