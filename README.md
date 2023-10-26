@@ -24,6 +24,7 @@ graph TD
     G <-->|HTTP| A[Webpage]
     G <-->|HTTP| B[Jupyter Notebook]
     G <-->|HTTP| D[Console App]
+    G <-->|HTTP| H[Mobile]
 ```
 * [Group Assignment 3](assignments/Group_Assignment_3_Creating_the_API.md) - The purpose of this assignment is to give students the opportunity to design and develop an API which will be able to interact with the database.
 
@@ -36,6 +37,7 @@ graph TD
     G <-->|HTTP| A[Webpage]
     G <-->|HTTP| B[Jupyter Notebook]
     G <-->|HTTP| D[Console App]
+    G <-->|HTTP| H[Mobile]
 ```
 
 * [Group Assignment 4](assignments/Group_Assignment_4_Putting_front-end_on_the_API.md) - The purpose of this assignment is to give students the opportunity to design and develop an API which will be able to interact with the database.
@@ -49,10 +51,12 @@ graph TD
         G <-->|HTTP| A[Webpage]
         G <-->|HTTP| B[Jupyter Notebook]
         G <-->|HTTP| D[Console App]
+        G <-->|HTTP| H[Mobile]
     subgraph "GA4"
         A
         B
         D
+        H
     end
 ```
 
