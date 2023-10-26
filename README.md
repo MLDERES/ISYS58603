@@ -12,7 +12,7 @@ The objective of this assignment is to provide you with hands-on experience in c
 * [Individual Assignment 4](assignments/Ind_Assignment_4_Using_an_API.ipynb) - In this assignment, students will explore public Application Programming Interfaces (APIs) learn how to make a connection to a public API to query for data and use the data that is returned. 
   
 ## Group Assignments
-(../assignments/01 - Group Project Overview.md)[Group Project Overview] 
+
 * [Group Assignment 2](assignments/Group_Assignment_2_Loading_Data.md) - The purpose of this assignment is to help students understand how to load data into a database using Python.
 
 ```mermaid
