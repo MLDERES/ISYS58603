@@ -13,6 +13,8 @@ Remember, the API you've built has several purposes, such as data exchange, modu
 ## Help and Hints
 We've provided some example code in the [examples folder](examples/README.md) to help you get started. Check the README in that folder for more information. Consider also looking into best practices for API and front-end development to ensure your application is efficient.
 
+**While we have provided examples in the same repository as our API, you are not required to do so. You may create a separate repository for your front-end application.  As a matter of fact, you may find this easier to manage.**
+
 In the [examples folder](examples/README.md)
 - **basic-flask.py** - This is a very basic example of how to use Flask to create an API.  It connects to the database and shows the basic examples for each of the 4 verbs (GET, POST, PUT, DELETE)
 - **advanced-flask.py** - this is a more advanced Flask example.  Providing more examples of how to use the different verbs and how to use parameters in the path and in the query string.
