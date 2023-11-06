@@ -87,4 +87,13 @@ If you are finding the folder structure complex, this is a simplified version of
 └── requirements.txt  # this is where you would put your python dependencies
 
 ```
+### Documentation
+Make sure that you are exposing all the information that someone would need to use your API.  This includes:
 
+- What are the paths for your API?
+- What are the parameters for each path?
+- What are the verbs for each path?
+- What are the responses for each path?
+- What are the data types for each parameter?
+- What are the data types for each response?
+- What are the data types for each query parameter?
