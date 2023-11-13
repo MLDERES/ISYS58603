@@ -14,5 +14,7 @@ Also you will need to submit a short video showing your front-end leveraging the
 ## Background
 The goal here is simply to use the API.  There is no need for something fancy.  *Your front-end only needs to call 3 endpoints from the supplied API.*  Keep it simple and realize that it is okay to hardcode the URL or query parameters if this makes the most sense for your application.
 
+It may be helpful to tell us what you had in mind with regard to the application.  Like what would you do if you had more time and what would be the overall goal of the project, assuming resources and knowledge of how to pull it off weren't an issue.
+
 ## Help and Hints
 It may be helpful to start by exercising a few of the endpoints via [postman](https://www.postman.com/downloads/) or [curl](https://curl.se/docs/manpage.html).  This will help you to understand how the API works and what data it returns.  Once you have a good understanding of the API, you can start to build your front-end. 
