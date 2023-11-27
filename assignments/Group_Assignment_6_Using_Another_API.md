@@ -4,7 +4,7 @@
 The goal of this assignment is to help students to see how decisions made in their work affect the usability of their API.  In other words, how easy is it to use your API?  We're going to do this by having you use another group's API.  You will need to use the API that another group has created and then create a front-end application that uses that API.  You will create a brief video showing how your front-end leverages the API.
 
 ## Deliverable
-Submit the GitHub URL of your repository containing all code, dependencies, and a README with instructions for running the application. The application will be evaluated based on the effective use of the API, correctness, completeness (utilization of various API endpoints), and creativity.
+Submit the GitHub URL of your repository containing all code, dependencies, and a README with instructions for running the application. The application will be evaluated based on the effective use of the API, correctness, completeness (utilization of various API endpoints), and creativity.  *Your front-end only needs to call 3 endpoints from the supplied API.*
 
 ***<span style="color:red">NOTE:</span>This should be a new repository than the one you have been using up until now.  You can clone/fork the other team's repository locally so that you can run the API - but your front-end should be in a completely new repository with only your code.***
 
