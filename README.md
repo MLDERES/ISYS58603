@@ -1,6 +1,6 @@
-# ISYS5713
+# ISYS58603 - Advanced Data Management
 
-This repository represents the assignments that are part of ISYS 5713 - Special Projects in Advanced Data Management with Python.
+This repository represents the assignments that are part of ISYS 58603 - Advanced Data Management
 
 
 ## Independent Assignments
