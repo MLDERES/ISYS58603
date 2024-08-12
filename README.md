@@ -24,6 +24,8 @@ graph TD
         G <-->|HTTP| D[Console App]
         G <-->|HTTP| H[Mobile]
 ```
+* [Group Assignment 1](assingments/Group_Assignment_1_Vision_and_Design.md) - The goal of this assignment is to establish the project charter and develop the conceptual architecture.
+The high-level architecture developed here will outline the various entities that are to be managed in the system, while the project charter establishes the overall goal of the project and key deliverables.
 
 * [Group Assignment 2](assignments/Group_Assignment_2_Loading_Data.md) - The purpose of this assignment is to help students understand how to load data into a database using Python.
 
