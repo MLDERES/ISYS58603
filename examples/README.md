@@ -4,6 +4,8 @@ This folder contains examples which can provide guidance for some of the assignm
 
 Also, notice that full paths/urls are provided but may not match what you are using.  For example, the database path may be different on your machine.  You will need to update the code to match your environment. Also if you choose to expose the endpoint on a different port, you will need to update the code to match.
 
+In addition to the implementations provided here, you can review the oas-*.yaml files to see the OpenAPI documentation for each example.  This documentation can be used to test the APIs or to tell other tools how to generate client code for the APIs.  Note that only the oas-advanced-flask.yaml file and the oas-basic-flask.yaml files are provided.  To see the OpenAPI documentation for the FastAPI example, you will need to run the FastAPI example and go to the */docs* endpoint.
+
 ## basic-flask.py
 This is an example of how to write an API using Flask. This example shows how to get/post and delete customers from the chinook database.  In order to run this example, 
 you will need to install the following packages:

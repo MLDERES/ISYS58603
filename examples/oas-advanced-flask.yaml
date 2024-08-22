@@ -1,0 +1,71 @@
+openapi: 3.0.0
+info:
+  title: API Example
+  version: 1.0.0
+paths:
+  /:
+    get:
+      summary: Returns a greeting message
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+  /customers:
+    get:
+      summary: Get customers from the database
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: The maximum number of customers to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+          description: The starting customer id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+  /invoices:
+    get:
+      summary: Get invoices from the database
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: The maximum number of invoices to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+          description: The starting invoice id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    amount:
+                      type: number
