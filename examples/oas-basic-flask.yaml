@@ -1,7 +1,11 @@
 openapi: 3.0.0
 info:
-  title: My API
-  version: 1.0.0
+  version: 3.0.0
+  title: Sample API using basic flask
+  description: This is a sample API using basic flask connecting to the Chinook database
+servers:
+  - url: https://localhost:5000
+    description: For use with a local installation
 paths:
   /:
     get:
