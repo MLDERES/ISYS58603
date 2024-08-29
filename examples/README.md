@@ -5,13 +5,13 @@ This folder contains examples which can provide guidance for some of the assignm
 Also, notice that full paths/urls are provided but may not match what you are using.  For example, the database path may be different on your machine.  You will need to update the code to match your environment. Also if you choose to expose the endpoint on a different port, you will need to update the code to match.
 
 ## OpenAPI
-In addition to the implementations provided here, you can review the oas-*.yaml files to see the OpenAPI documentation for each example.  This documentation can be used to test the APIs or to tell other tools how to generate client code for the APIs.  In addition you can see the OpenAPI documentation for the FastAPI example, by running the FastAPI example and go to the */docs* endpoint.
+In addition to the implementations provided here, you can review the ```oas-*.yaml``` files to see the [OpenAPI documentation](https://spec.openapis.org/oas/latest.html) for each example.  This documentation can be used to test the APIs or to tell other tools how to generate client code for the APIs.  In addition you can see the OpenAPI documentation for the FastAPI example, by running the FastAPI example and go to the ```/docs``` endpoint.
 
-There are a few reasons why the OpenAPI documentation is important.
-- It allows you to test the API without writing any code.  This can be very helpful when you are first learning how to use an API.  With a tool like Swagger or Postman, you can import the spec, and try out the api by providing a few parameters rather than having to code up an entire client to try it out.  
+There are a few reasons why the OpenAPI specification is important.
+- It allows you to test the API without writing any code.  This can be very helpful when you are first learning how to use an API.  With a tool like [Swagger](https://swagger.io/tools/swagger-ui/) or [Postman](https://www.postman.com/), you can import the spec, and try out the api by providing a few parameters rather than having to code up an entire client to try it out.  
 - These same tools often allow you to generate client code for the API in the programming language of choice.  This can be helpful by removing the redundancy of creating the calls to the endpoints allow you to focus on the business logic which uses these endpoints.  
 - You could even use tools like Swagger and Postman to generate tests or server code for the API.  Having a simple server which doesn't rely on the database can be helpful for testing the API.  This can be especially helpful when you are working with a team of developers who need to test the API.
-- The OpenAPI documentation can be used to generate documentation for the API.  This can be helpful when you are working with other developers who need to understand how to use the API.  This can be especially helpful when you are working with a team of developers who need to understand how to use the API.
+- The OpenAPI specification can be used to generate documentation for the API.  This can be helpful when you are working with other developers who need to understand how to use the API.  This can be especially helpful when you are working with a team of developers who need to understand how to use the API.
 
 ## basic-flask.py
 This is an example of how to write an API using Flask. This example shows how to get/post and delete customers from the chinook database.  In order to run this example, 
