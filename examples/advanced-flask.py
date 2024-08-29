@@ -42,6 +42,12 @@ def index():
     return 'Hello, World!'
 
 @app.route('/customers', methods=['GET'])
+# Get customers from the database
+# Support for query arguments:
+# limit:  The maximum number of customers to return use -1 for all (default: -1)
+# start:  The starting customer id (default: 0)
+# Example:
+# https://localhost:5000/customers?limit=10
 def get_customers():
     '''
     Get customers from the database
@@ -63,18 +69,14 @@ def get_customers():
     return jsonify(all_customers)
 
 @app.route('/invoices', methods=['GET'])
+# Get invoices from the database
+# Support for query arguments:
+# limit:  The maximum number of invoices to return
+# start:  The starting invoice id
+# Example:
+# https://localhost:5000/invoices?limit=10
+# https://localhost:5000/invoices?start=1&limit=20    
 def get_invoices():
-    '''
-    Get invoices from the database
-    
-    Support for query arguments:
-    limit:  The maximum number of invoices to return
-    start:  The starting invoice id
-    
-    Example:
-    https://localhost:5000/invoices?limit=10
-    https://localhost:5000/invoices?start=1&limit=20    
-    '''
     limit = int(request.args.get('limit',-1))
     start = int(request.args.get('start',0))
     
@@ -149,8 +151,6 @@ def select_invoices(start, limit):
         })
     
     return list(invoices.values())
-    
-    
     
 ###
 # Main
