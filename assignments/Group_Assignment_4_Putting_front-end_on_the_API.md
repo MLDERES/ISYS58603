@@ -6,12 +6,14 @@ The purpose of this assignment is to transition your API into a functional appli
 ## Deliverable
 Submit the GitHub URL of your repository containing all code, dependencies, and a README with instructions for running the application. The application will be evaluated based on the effective use of the API, correctness, completeness (utilization of various API endpoints), and creativity.
 
-***<span style="color:red">NOTE:</span>be sure to TAG the commit that you want to be graded with `v3.0`, `GA4` or similar so that it's clear what you want to be evaluated***
+***<span style="color:red">NOTE:</span>be sure to TAG the commit that you want to be graded with `v0.3`, `GA4` or similar so that it's clear what you want to be evaluated***
 ## Background
 Remember, the API you've built has several purposes, such as data exchange, modularity, and reusability. Think about how these aspects can influence your front-end. For example, if your API focuses on data exchange, you might build a data visualization front-end.
 
 ## Help and Hints
 We've provided some example code in the [examples folder](examples/README.md) to help you get started. Check the README in that folder for more information. Consider also looking into best practices for API and front-end development to ensure your application is efficient.
+
+**While we have provided examples in the same repository as our API, you are not required to do so. You may create a separate repository for your front-end application.  As a matter of fact, you may find this easier to manage.**
 
 In the [examples folder](examples/README.md)
 - **basic-flask.py** - This is a very basic example of how to use Flask to create an API.  It connects to the database and shows the basic examples for each of the 4 verbs (GET, POST, PUT, DELETE)

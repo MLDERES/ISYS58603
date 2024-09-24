@@ -1,6 +1,6 @@
-# ISYS5713
+# ISYS58603 - Advanced Data Management
 
-This repository represents the assignments that are part of ISYS 5713 - Special Projects in Advanced Data Management with Python.
+This repository represents the assignments that are part of ISYS 58603 - Advanced Data Management
 
 
 ## Independent Assignments
@@ -12,6 +12,20 @@ The objective of this assignment is to provide you with hands-on experience in c
 * [Individual Assignment 4](assignments/Ind_Assignment_4_Using_an_API.ipynb) - In this assignment, students will explore public Application Programming Interfaces (APIs) learn how to make a connection to a public API to query for data and use the data that is returned. 
   
 ## Group Assignments
+The groups assignments will be building toward a deployable API with a unique front-end which provides and example of how to use the API and also excercise the API.  Throughout the group assignments, teams will discover the need to go back and address deficencies in prior areas of the design - so while this is shown as a linear path, that's not how the implementation will actually procede.  Here's the end result
+
+```mermaid
+graph TD
+    E[Database] <-->|DB Data| F[API DB Access]
+    F <-->|Filtered data| G[API Endpoints]    
+    
+        G <-->|HTTP| A[Webpage]
+        G <-->|HTTP| B[Jupyter Notebook]
+        G <-->|HTTP| D[Console App]
+        G <-->|HTTP| H[Mobile]
+```
+* [Group Assignment 1](assignments/Group_Assignment_1_Vision_and_Design.md) - The goal of this assignment is to establish the project charter and develop the conceptual architecture.
+The high-level architecture developed here will outline the various entities that are to be managed in the system, while the project charter establishes the overall goal of the project and key deliverables.
 
 * [Group Assignment 2](assignments/Group_Assignment_2_Loading_Data.md) - The purpose of this assignment is to help students understand how to load data into a database using Python.
 

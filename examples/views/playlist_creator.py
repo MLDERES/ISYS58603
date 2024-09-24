@@ -116,3 +116,19 @@ def delete_playlist():
 if __name__ == '__main__':
     Term.clear()
     main_menu()
+    
+### API Endpoints
+# GET /playlists
+# GET /playlists/{playlist_id}
+# GET /playlists?name={playlist_name}
+# POST /playlists
+# PUT /playlists/{playlist_id} (add songs)
+# DELETE /playlists/{playlist_id}
+
+# GET /tracks?name={track_name}
+# GET /tracks?artist={artist_name}&start={start}&limit={limit}
+# GET /tracks?genre={genre_name}&page={page_number}&size={page_size}
+
+# GET /album?name={track_name}
+# GET /album?artist={artist_name}&start={start}&limit={limit}
+# GET /album?genre={genre_name}&page={page_number}&size={page_size}

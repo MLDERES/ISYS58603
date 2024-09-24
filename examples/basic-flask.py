@@ -11,6 +11,8 @@ from pathlib import Path
 ###
 app = Flask(__name__) 
 CORS(app)
+
+# Set the path to the database file based on the current working directory
 DB_PATH = Path.cwd() 
 DATABASE_FILE = DB_PATH / 'chinook.db'
 

@@ -8,7 +8,7 @@ There are two parts to this assignment.  One for the group to complete, and one 
 
 ***<span style="color:red">NOTE:</span> If your repository is private, you'll need to invite the professors***
 
-***<span style="color:red">NOTE2:</span> Be sure to TAG the commit that you want to be graded with `v1.0`, `GA2` or similar so that it's clear what you want to be evaluated***.  This will also allow you to continue working on your repo without worrying about it being graded in a state of flux.
+***<span style="color:red">NOTE2:</span> Be sure to TAG the commit that you want to be graded with `v0.1`, `GA2` or similar so that it's clear what you want to be evaluated***.  This will also allow you to continue working on your repo without worrying about it being graded in a state of flux.
 
 - **As a group**
   - A GitHub repository which all members of the group are contributors

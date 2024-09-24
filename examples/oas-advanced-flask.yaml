@@ -1,0 +1,127 @@
+openapi: 3.0.0
+info:
+  title: Chinook API
+  version: 1.0.0
+  description: API to interact with the Chinook database, including endpoints for customers and invoices.
+servers:
+  - url: http://localhost:5000
+    description: Local server
+paths:
+  /:
+    get:
+      summary: Root endpoint
+      description: Returns a simple greeting message.
+      responses:
+        '200':
+          description: A greeting message.
+          content:
+            text/plain:
+              schema:
+                type: string
+  /customers:
+    get:
+      summary: Get customers
+      description: Retrieve a list of customers from the database.
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: -1
+          description: The maximum number of customers to return.
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: The starting customer ID.
+      responses:
+        '200':
+          description: A list of customers.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+  /invoices:
+    get:
+      summary: Get invoices
+      description: Retrieve a list of invoices from the database.
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: -1
+          description: The maximum number of invoices to return.
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: The starting invoice ID.
+      responses:
+        '200':
+          description: A list of invoices.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Invoice'
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        CustomerId:
+          type: integer
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        Company:
+          type: string
+        Address:
+          type: string
+        City:
+          type: string
+        State:
+          type: string
+        Country:
+          type: string
+        PostalCode:
+          type: string
+        Phone:
+          type: string
+        Fax:
+          type: string
+        Email:
+          type: string
+        SupportRepId:
+          type: integer
+    Invoice:
+      type: object
+      properties:
+        invoiceId:
+          type: integer
+        customerId:
+          type: integer
+        invoiceDate:
+          type: string
+          format: date-time
+        invoiceItems:
+          type: array
+          items:
+            type: object
+            properties:
+              invoiceLineId:
+                type: integer
+              trackId:
+                type: integer
+              unitPrice:
+                type: number
+                format: float
+              quantity:
+                type: integer

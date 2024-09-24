@@ -22,7 +22,7 @@ The following don't have to be for every table, only the tables where it makes s
 * PUT - Update an entity in your database
 * DELETE - Remove an entity from your database
 
-***<span style="color:red">NOTE:</span>be sure to TAG the commit that you want to be graded with `v2.0`, `GA3` or similar so that it's clear what you want to be evaluated***
+***<span style="color:red">NOTE:</span> Be sure to TAG the commit that you want to be graded with `v0.2`, `GA3` or similar so that it's clear what you want to be evaluated***
 
 ## Background
 You are building an API to access the data in the database you have developed.  Your API can be **focused** on getting data into the database or out of the database (most likely out of the database).  Strongly consider what kinds of queries will be useful and plan ahead so that your API will offer a consistent and easy to use interface.
@@ -52,6 +52,8 @@ Rather than give an explicit list of instructions here.  A general outline of ac
   * Which tables/entities are going to make sense for updating and deleting?
   * How do you want to expose queries for the different entities?
 * Document your paths in your README.md or HOWTO.md and in the comments (using [docstrings](https://www.programiz.com/python-programming/docstrings) and/or the [OpenAPI](https://swagger.io/docs/specification/about/) specification)
+  * You MUST also include an OpenAPI specification in your repository as documentation.  This can be in the form of a `swagger.json` file or a `swagger.yaml` file.  You can also use a tool like [Swagger Editor](https://editor.swagger.io/) to create the specification.
+  * Once you create this specification, you can use it to generate documentation for your API.  This can be done using a tool like [Swagger UI](https://swagger.io/tools/swagger-ui/) or [Postman](https://www.postman.com/downloads/).  Their are [a myriad of other tools](https://openapi.tools/) as well that can help take your documentation and turn it into a user-friendly interface, code, tests, etc.
 * Create your paths and the associated functions in the controller
   * If you just create the shell of the function, then the content can be `pass` to make it a syntactically correct python.  This can be used as a placeholder until you are ready to implement the function.
   ```python
@@ -87,4 +89,13 @@ If you are finding the folder structure complex, this is a simplified version of
 └── requirements.txt  # this is where you would put your python dependencies
 
 ```
+### Documentation
+Make sure that you are exposing all the information that someone would need to use your API.  This includes:
 
+- What are the paths for your API?
+- What are the parameters for each path?
+- What are the verbs for each path?
+- What are the responses for each path?
+- What are the data types for each parameter?
+- What are the data types for each response?
+- What are the data types for each query parameter?

@@ -1,0 +1,131 @@
+openapi: 3.0.0
+info:
+  version: 3.0.0
+  title: Sample API using basic flask
+  description: This is a sample API using basic flask connecting to the Chinook database
+servers:
+  - url: https://localhost:5000
+    description: For use with a local installation
+paths:
+  /:
+    get:
+      summary: Get a greeting
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hello, World!
+  /customers:
+    get:
+      summary: Get all customers
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+    post:
+      summary: Create a new customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+    put:
+      summary: Update an existing customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+    /{id}:
+      get:
+        summary: Get a single customer
+        parameters:
+          - name: id
+            in: path
+            required: true
+            schema:
+              type: integer
+        responses:
+          '200':
+            description: Successful response
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Customer'
+      delete:
+        summary: Delete a customer
+        parameters:
+          - name: id
+            in: path
+            required: true
+            schema:
+              type: integer
+        responses:
+          '200':
+            description: Successful response
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Customer deleted successfully
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        Company:
+          type: string
+        Address:
+          type: string
+        City:
+          type: string
+        State:
+          type: string
+        Country:
+          type: string
+        PostalCode:
+          type: string
+        Phone:
+          type: string
+        Fax:
+          type: string
+        Email:
+          type: string
