@@ -66,3 +66,32 @@ Rather than give an explicit list of instructions here.  A general outline of ac
   * The next easiest way is to use Pandas to read the data and then use the `to_sql` method to write the data to the database.  This is a little more complicated, but it is more efficient.  
 * Queries should be written **as functions** in the model, therefore multiple queries can be stored in a single file.  These functions should be called from the controller.  The controller should be called from the main application.  This is the MVC pattern.  It is not required, but it is strongly encouraged.
   * **Extra hint**:  If you do SQLAlchemy for inserts now, it will help you do the queries and the API later.
+
+## Sample project structure
+Students have said that it is helpful to understand how a project of this type can be structured.  Here is a simple example of how the project could be structured.  This is not the only way to structure the project, but it is a way that has worked for many students in the past.
+
+```
+project_root/
+│
+├── README.md
+│
+├── api/
+│   ├── __init__.py
+│   ├── main.py
+│   ├── routes.py
+│   └── models.py
+│
+├── utility/
+│   ├── load_data.py
+│   └── data/
+│       ├── dataset1.csv
+│       ├── dataset2.csv
+│       └── dataset3.csv
+│
+└── data/
+    └── database.sqlitedb
+```
+* The `api` folder contains the code for the API.  This is where the Flask application would be located.  The `routes.py` file would contain the routes for the API.  The `models.py` file would contain the functions that interact with the database, that is, the queries.  The `main.py` file would contain the code to start the application.
+* The `utility` folder contains the code for loading the data into the database.  The `load_data.py` file would contain the code to load the data.  The `data` folder would contain the raw data files.
+* The `data` folder would contain the SQLite database file.
+* The `README.md` file would contain the documentation for the project. Including information on the API endpoints, the database schema, and the data dictionary.  It may also contain information on how to run the application.
