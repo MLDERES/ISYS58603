@@ -74,6 +74,7 @@ Students have said that it is helpful to understand how a project of this type c
 project_root/
 │
 ├── README.md
+├── config.py
 │
 ├── api/
 │   ├── __init__.py
@@ -95,3 +96,4 @@ project_root/
 * The `utility` folder contains the code for loading the data into the database.  The `load_data.py` file would contain the code to load the data.  The `data` folder would contain the raw data files.
 * The `data` folder would contain the SQLite database file.
 * The `README.md` file would contain the documentation for the project. Including information on the API endpoints, the database schema, and the data dictionary.  It may also contain information on how to run the application.
+* The `config.py` file may be used to store configuration information for the application.  This could include the database connection string, the location of the raw data files, etc. This file would be imported into the other files that need this information. Keep in mind if your database connection string uses a password, you should not store this in a public repository.  You can use environment variables to store this information.  This is a more advanced topic, but it is good to be aware of it.
