@@ -70,6 +70,8 @@ Rather than give an explicit list of instructions here.  A general outline of ac
 ## Sample project structure
 Students have said that it is helpful to understand how a project of this type can be structured.  Here is a simple example of how the project could be structured.  This is not the only way to structure the project, but it is a way that has worked for many students in the past.
 
+Keep in mind, that this is the ultimate goal of the project, not the current state.  The current state is just to get the data into the database.  The structure of the project will evolve as the project progresses.  It is okay to either start with the full structure (and leave files as placeholders) or to start with a simpler structure and add to it as you go.
+
 ```
 project_root/
 │
