@@ -27,7 +27,7 @@ graph TD
 * [Group Assignment 1](assignments/Group_Assignment_1_Vision_and_Design.md) - The goal of this assignment is to establish the project charter and develop the conceptual architecture.
 The high-level architecture developed here will outline the various entities that are to be managed in the system, while the project charter establishes the overall goal of the project and key deliverables.
 
-* [Group Assignment 2](assignments/Group_Assignment_2_Loading_Data.md) - The purpose of this assignment is to help students understand how to load data into a database using Python.
+* [Group Assignment 2](assignments/Group_Assignment_2_Loading_Data.md) - The purpose of this assignment is to help students understand how to load data into a database using Python.  Before digging too deeply into this assignment, it may be helpful to review [an example of how the final project may be laid out](https://github.com/ISYS58603/MovieRatings).  You are welcome to structure in whatever makes sense for you, but this simple structure can help to keep things organized.
 
 ```mermaid
 graph TD

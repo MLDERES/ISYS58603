@@ -73,27 +73,33 @@ Students have said that it is helpful to understand how a project of this type c
 ```
 project_root/
 │
-├── README.md
-├── config.py
-│
 ├── api/
-│   ├── __init__.py
-│   ├── main.py
-│   ├── routes.py
-│   └── models.py
+│   ├── __init__.py               # Package initializer for the 'api' directory
+│   ├── models.py                 # Database models/classes
+│   ├── routes.py                 # API route definitions
+│   └── services.py               # Service functions, handling business logic, and database operations
+│
+├── data/
+│   └── movie_data.db             # SQLite database file 
+│
+├── docs/
+│   ├── api_documentation.md      # Documentation for API usage
+|   └── data_dictionary.md        # Data dictionary for the database
+│
+├── tests/                        # Optional directory for unit tests
+│   ├── __init__.py               # Package initializer for 'tests'
+│   ├── test_db.py                # Unit tests for database operations
+│   ├── test_routes.py            # Unit tests for API routes
+│   └── test_services.py          # Unit tests for service layer
 │
 ├── utility/
-│   ├── load_data.py
-│   └── data/
-│       ├── dataset1.csv
-│       ├── dataset2.csv
-│       └── dataset3.csv
+│   ├── helpers.py                # Utility functions used across the project
+│   └── config.py                 # Configuration settings for the application
 │
-└── data/
-    └── database.sqlitedb
+├── .gitignore                    # Specifies files and folders to be ignored by Git
+├── LICENSE                       # License information for the project
+├── README.md                     # General overview and setup instructions for the project
+└── run.py                        # Entry point script to start the Flask application
 ```
-* The `api` folder contains the code for the API.  This is where the Flask application would be located.  The `routes.py` file would contain the routes for the API.  The `models.py` file would contain the functions that interact with the database, that is, the queries.  The `main.py` file would contain the code to start the application.
-* The `utility` folder contains the code for loading the data into the database.  The `load_data.py` file would contain the code to load the data.  The `data` folder would contain the raw data files.
-* The `data` folder would contain the SQLite database file.
-* The `README.md` file would contain the documentation for the project. Including information on the API endpoints, the database schema, and the data dictionary.  It may also contain information on how to run the application.
-* The `config.py` file may be used to store configuration information for the application.  This could include the database connection string, the location of the raw data files, etc. This file would be imported into the other files that need this information. Keep in mind if your database connection string uses a password, you should not store this in a public repository.  You can use environment variables to store this information.  This is a more advanced topic, but it is good to be aware of it.
+
+There are a few challenges to putting the files together in this way, so you can take a look at [this project](https://github.com/ISYS58603/MovieRatings) to see examples of how libraries are referenced, how the data is loaded, and how the queries are written.  This is a simple example, but it should be enough to get you started.  If you have questions, please ask.
